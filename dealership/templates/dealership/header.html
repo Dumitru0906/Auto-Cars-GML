@@ -1,0 +1,135 @@
+<header class="site-header">
+
+    <nav class="navbar">
+
+
+        <a
+            href="{% url 'home' %}#acasa"
+            class="logo"
+        >
+
+            <div class="logo-main">
+                AUTO CARS <span>GML</span>
+            </div>
+
+            <div class="logo-srl">
+                SRL
+            </div>
+
+        </a>
+
+
+
+        <div
+            class="nav-links"
+            id="mainNavigation"
+        >
+
+
+            <!-- HOME -->
+
+            <a
+                href="{% url 'home' %}#acasa"
+                data-nav="home"
+                {% if request.resolver_match.url_name == 'home' %}
+                    class="active"
+                {% endif %}
+            >
+                Acasă
+            </a>
+
+
+
+            <!-- AVAILABLE -->
+
+            <a
+                href="{% url 'available_inventory' %}"
+                data-nav="available"
+                {% if request.resolver_match.url_name == 'available_inventory' %}
+                    class="active"
+                {% elif request.resolver_match.url_name == 'car_detail' and car.status != 'sold' %}
+                    class="active"
+                {% endif %}
+            >
+                Mașini disponibile
+            </a>
+
+
+
+            <!-- SOLD -->
+
+            <a
+                href="{% url 'sold_inventory' %}"
+                data-nav="sold"
+                {% if request.resolver_match.url_name == 'sold_inventory' %}
+                    class="active"
+                {% elif request.resolver_match.url_name == 'car_detail' and car.status == 'sold' %}
+                    class="active"
+                {% endif %}
+            >
+                Mașini vândute
+            </a>
+
+
+
+            <!-- FIND CAR -->
+
+            <a
+                href="{% url 'home' %}#gaseste-masina"
+                data-nav="find-car"
+            >
+                Găsește-mi o mașină
+            </a>
+
+
+
+            <!-- REVIEWS -->
+
+            <a
+                href="{% url 'home' %}#recenzii"
+                data-nav="reviews"
+            >
+                Recenzii
+            </a>
+
+
+
+            <!-- CONTACT -->
+
+            <a
+                href="{% url 'home' %}#contact"
+                data-nav="contact"
+            >
+                Contact
+            </a>
+
+
+        </div>
+
+
+
+        <button
+            type="button"
+            class="mobile-menu-toggle"
+            id="mobileMenuToggle"
+            aria-label="Deschide meniul"
+            aria-expanded="false"
+            aria-controls="mainNavigation"
+        >
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
+
+
+    </nav>
+
+</header>
+
+
+<div
+    class="mobile-menu-backdrop"
+    id="mobileMenuBackdrop"
+></div>

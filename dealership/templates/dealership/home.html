@@ -1,0 +1,1975 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="ro">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Auto Cars GML SRL
+    </title>
+
+
+    <link
+        rel="stylesheet"
+        href="{% static 'dealership/style.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'dealership/mobile_nav.css' %}"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"
+        crossorigin="anonymous"
+    >
+
+</head>
+
+
+<body>
+
+
+    {% include 'dealership/header.html' %}
+
+
+
+    <!-- ==================================================
+         HERO / ACASĂ
+    =================================================== -->
+
+    <section
+        class="hero"
+        id="acasa"
+    >
+
+
+        <div class="hero-visual">
+
+            <img
+                src="{% static 'dealership/images/hero-showroom.png' %}"
+                alt="Selecție variată de mașini Auto Cars GML"
+                class="hero-photo"
+            >
+
+        </div>
+
+
+
+        <div class="hero-inner">
+
+
+            <div class="hero-content">
+
+
+                <p class="hero-small">
+                    MAȘINI SELECTATE CU ATENȚIE
+                </p>
+
+
+                <h1>
+
+                    Găsește următoarea
+
+                    <br>
+
+                    ta <span>mașină</span>
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    Mașini atent selecționate, verificate și pregătite
+                    pentru următorul proprietar.
+
+                    <br>
+
+                    Dacă nu găsești ceea ce cauți, te putem ajuta
+                    să găsești mașina potrivită pentru tine.
+
+                </p>
+
+
+
+                <div class="hero-buttons">
+
+
+                    <a
+                        href="#masini-disponibile"
+                        class="btn-primary"
+                    >
+                        Vezi mașinile
+                    </a>
+
+
+                    <a
+                        href="#gaseste-masina"
+                        class="btn-secondary"
+                    >
+                        Găsește-mi o mașină
+                    </a>
+
+
+                </div>
+
+
+
+                <div class="hero-benefits">
+
+
+                    <div class="benefit">
+
+                        <span class="check">
+                            ✓
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Mașini verificate
+                            </strong>
+
+                            <p>
+                                Selecționate cu atenție
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="benefit">
+
+                        <span class="check">
+                            ✓
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Serviciu personalizat
+                            </strong>
+
+                            <p>
+                                Te ajutăm să găsești ce cauți
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="benefit">
+
+                        <span class="check">
+                            ✓
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Proces simplu
+                            </strong>
+
+                            <p>
+                                Rapid și transparent
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ==================================================
+         AVAILABLE CARS
+    =================================================== -->
+
+    <section
+        class="home-car-section available-home-section"
+        id="masini-disponibile"
+    >
+
+        <div class="home-section-container">
+
+
+            <div class="home-section-heading">
+
+
+                <div>
+
+                    <p class="section-small">
+                        STOC ACTUAL
+                    </p>
+
+                    <h2>
+                        Mașini disponibile
+                    </h2>
+
+                </div>
+
+
+
+                <div class="home-section-actions">
+
+
+                    <div
+                        class="carousel-controls"
+                        data-controls="availableCarousel"
+                    >
+
+                        <button
+                            type="button"
+                            class="carousel-arrow carousel-prev"
+                            aria-label="Mașinile anterioare"
+                        >
+                            ←
+                        </button>
+
+                        <button
+                            type="button"
+                            class="carousel-arrow carousel-next"
+                            aria-label="Următoarele mașini"
+                        >
+                            →
+                        </button>
+
+                    </div>
+
+
+                    <a
+                        href="{% url 'available_inventory' %}"
+                        class="section-all-link"
+                    >
+                        Toate mașinile
+                        <span>→</span>
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            {% if available_cars %}
+
+
+                <div
+                    class="home-carousel-track"
+                    id="availableCarousel"
+                >
+
+
+                    {% for car in available_cars %}
+
+
+                        <article class="home-car-card">
+
+
+                            <div class="home-car-image">
+
+
+                                {% if car.main_image %}
+
+                                    <img
+                                        src="{{ car.main_image.image.url }}"
+                                        alt="{{ car.brand }} {{ car.model_name }}"
+                                    >
+
+                                {% else %}
+
+                                    <div class="car-image-placeholder">
+                                        Fără fotografie
+                                    </div>
+
+                                {% endif %}
+
+
+                                <span class="home-status available">
+                                    DISPONIBILĂ
+                                </span>
+
+
+                            </div>
+
+
+
+                            <div class="home-car-info">
+
+
+                                <h3>
+                                    {{ car.brand }}
+                                    {{ car.model_name }}
+                                </h3>
+
+
+                                <div class="home-car-specs">
+
+                                    <span>
+                                        {{ car.year }}
+                                    </span>
+
+                                    <span>
+                                        {{ car.mileage }} km
+                                    </span>
+
+                                    <span>
+                                        {{ car.get_transmission_display }}
+                                    </span>
+
+                                    <span>
+                                        {{ car.get_fuel_display }}
+                                    </span>
+
+                                </div>
+
+
+
+                                <div class="home-car-bottom">
+
+                                    <strong>
+                                        {{ car.price }} €
+                                    </strong>
+
+
+                                    <a
+                                        href="{% url 'car_detail' car.pk %}"
+                                    >
+                                        Vezi mașina
+                                        <span>→</span>
+                                    </a>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </article>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            {% else %}
+
+
+                <div class="home-empty-state">
+
+                    <h3>
+                        Momentan nu există mașini disponibile.
+                    </h3>
+
+                    <p>
+                        Revino în curând pentru noile mașini.
+                    </p>
+
+                </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         SOLD CARS
+    =================================================== -->
+
+    <section
+        class="home-car-section sold-home-section"
+        id="masini-vandute"
+    >
+
+        <div class="home-section-container">
+
+
+            <div class="home-section-heading dark-heading">
+
+
+                <div>
+
+                    <p class="section-small">
+                        ISTORIC AUTO CARS GML
+                    </p>
+
+                    <h2>
+                        Mașini vândute
+                    </h2>
+
+                </div>
+
+
+
+                <div class="home-section-actions">
+
+
+                    <div
+                        class="carousel-controls"
+                        data-controls="soldCarousel"
+                    >
+
+                        <button
+                            type="button"
+                            class="carousel-arrow dark carousel-prev"
+                            aria-label="Mașinile anterioare"
+                        >
+                            ←
+                        </button>
+
+                        <button
+                            type="button"
+                            class="carousel-arrow dark carousel-next"
+                            aria-label="Următoarele mașini"
+                        >
+                            →
+                        </button>
+
+                    </div>
+
+
+                    <a
+                        href="{% url 'sold_inventory' %}"
+                        class="section-all-link dark"
+                    >
+                        Toate mașinile
+                        <span>→</span>
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            {% if sold_cars %}
+
+
+                <div
+                    class="home-carousel-track"
+                    id="soldCarousel"
+                >
+
+
+                    {% for car in sold_cars %}
+
+
+                        <article class="home-car-card sold-home-card">
+
+
+                            <div class="home-car-image">
+
+
+                                {% if car.main_image %}
+
+                                    <img
+                                        src="{{ car.main_image.image.url }}"
+                                        alt="{{ car.brand }} {{ car.model_name }}"
+                                    >
+
+                                {% else %}
+
+                                    <div class="car-image-placeholder">
+                                        Fără fotografie
+                                    </div>
+
+                                {% endif %}
+
+
+                                <div class="sold-home-overlay"></div>
+
+
+                                <span class="home-status sold">
+                                    VÂNDUTĂ
+                                </span>
+
+
+                            </div>
+
+
+
+                            <div class="home-car-info">
+
+
+                                <h3>
+                                    {{ car.brand }}
+                                    {{ car.model_name }}
+                                </h3>
+
+
+                                <div class="home-car-specs">
+
+                                    <span>
+                                        {{ car.year }}
+                                    </span>
+
+                                    <span>
+                                        {{ car.mileage }} km
+                                    </span>
+
+                                    <span>
+                                        {{ car.get_transmission_display }}
+                                    </span>
+
+                                    <span>
+                                        {{ car.get_fuel_display }}
+                                    </span>
+
+                                </div>
+
+
+
+                                <div class="home-car-bottom">
+
+                                    <strong class="sold-home-text">
+                                        VÂNDUTĂ
+                                    </strong>
+
+
+                                    <a
+                                        href="{% url 'car_detail' car.pk %}"
+                                    >
+                                        Vezi mașina
+                                        <span>→</span>
+                                    </a>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </article>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            {% else %}
+
+
+                <div class="home-empty-state dark-empty">
+
+                    <p>
+                        Mașinile vândute vor apărea aici.
+                    </p>
+
+                </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         RESERVED CARS
+    =================================================== -->
+
+    {% if reserved_cars %}
+
+
+        <section
+            class="home-car-section reserved-home-section"
+            id="masini-rezervate"
+        >
+
+            <div class="home-section-container">
+
+
+                <div class="home-section-heading">
+
+
+                    <div>
+
+                        <p class="section-small">
+                            ÎN CURS DE VÂNZARE
+                        </p>
+
+                        <h2>
+                            Mașini rezervate
+                        </h2>
+
+                    </div>
+
+
+
+                    <div class="home-section-actions">
+
+
+                        <div
+                            class="carousel-controls"
+                            data-controls="reservedCarousel"
+                        >
+
+                            <button
+                                type="button"
+                                class="carousel-arrow carousel-prev"
+                                aria-label="Mașinile rezervate anterioare"
+                            >
+                                ←
+                            </button>
+
+                            <button
+                                type="button"
+                                class="carousel-arrow carousel-next"
+                                aria-label="Următoarele mașini rezervate"
+                            >
+                                →
+                            </button>
+
+                        </div>
+
+
+                        <a
+                            href="{% url 'reserved_inventory' %}"
+                            class="section-all-link"
+                        >
+                            Toate mașinile
+                            <span>→</span>
+                        </a>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div
+                    class="home-carousel-track"
+                    id="reservedCarousel"
+                >
+
+
+                    {% for car in reserved_cars %}
+
+
+                        <article class="home-car-card">
+
+
+                            <div class="home-car-image">
+
+
+                                {% if car.main_image %}
+
+                                    <img
+                                        src="{{ car.main_image.image.url }}"
+                                        alt="{{ car.brand }} {{ car.model_name }}"
+                                    >
+
+                                {% else %}
+
+                                    <div class="car-image-placeholder">
+                                        Fără fotografie
+                                    </div>
+
+                                {% endif %}
+
+
+                                <span class="home-status reserved">
+                                    REZERVATĂ
+                                </span>
+
+
+                            </div>
+
+
+
+                            <div class="home-car-info">
+
+
+                                <h3>
+                                    {{ car.brand }}
+                                    {{ car.model_name }}
+                                </h3>
+
+
+                                <div class="home-car-specs">
+
+                                    <span>
+                                        {{ car.year }}
+                                    </span>
+
+                                    <span>
+                                        {{ car.mileage }} km
+                                    </span>
+
+                                    <span>
+                                        {{ car.get_transmission_display }}
+                                    </span>
+
+                                    <span>
+                                        {{ car.get_fuel_display }}
+                                    </span>
+
+                                </div>
+
+
+
+                                <div class="home-car-bottom">
+
+                                    <strong>
+                                        {{ car.price }} €
+                                    </strong>
+
+
+                                    <a
+                                        href="{% url 'car_detail' car.pk %}"
+                                    >
+                                        Vezi mașina
+                                        <span>→</span>
+                                    </a>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </article>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+    {% endif %}
+
+
+
+    <!-- ==================================================
+         FIND ME A CAR
+    =================================================== -->
+
+    <section
+        class="home-find-section"
+        id="gaseste-masina"
+    >
+
+        <div class="home-section-container">
+
+
+            <div class="home-find-layout">
+
+
+                <div class="home-find-intro">
+
+                    <p class="section-small">
+                        SERVICIU PERSONALIZAT
+                    </p>
+
+                    <h2>
+                        Spune-ne ce mașină cauți.
+                    </h2>
+
+
+                    <p>
+
+                        Nu ai găsit mașina potrivită în stoc?
+
+                        Completează preferințele tale, iar cererea
+                        va fi pregătită direct pentru WhatsApp.
+
+                    </p>
+
+
+                    <div class="home-find-steps">
+
+                        <div>
+                            <span>01</span>
+                            <strong>Spune-ne ce cauți</strong>
+                        </div>
+
+                        <div>
+                            <span>02</span>
+                            <strong>Deschidem WhatsApp</strong>
+                        </div>
+
+                        <div>
+                            <span>03</span>
+                            <strong>Trimite mesajul</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <form
+                    method="post"
+                    action="{% url 'home' %}#gaseste-masina"
+                    class="home-find-form"
+                >
+
+                    {% csrf_token %}
+
+                    <input
+                        type="hidden"
+                        name="form_type"
+                        value="find_car"
+                    >
+
+
+                    <div class="home-form-grid">
+
+
+                        <div class="home-form-field">
+
+                            <label
+                                for="{{ home_find_car_form.full_name.id_for_label }}"
+                            >
+                                Nume *
+                            </label>
+
+                            {{ home_find_car_form.full_name }}
+
+                        </div>
+
+
+                        <div class="home-form-field">
+
+                            <label
+                                for="{{ home_find_car_form.phone.id_for_label }}"
+                            >
+                                Telefon *
+                            </label>
+
+                            {{ home_find_car_form.phone }}
+
+                        </div>
+
+
+                        <div class="home-form-field full">
+
+                            <label
+                                for="{{ home_find_car_form.email.id_for_label }}"
+                            >
+                                Email
+                            </label>
+
+                            {{ home_find_car_form.email }}
+
+                        </div>
+
+
+                        <div class="home-form-field">
+
+                            <label
+                                for="{{ home_find_car_form.brand.id_for_label }}"
+                            >
+                                Marcă *
+                            </label>
+
+                            {{ home_find_car_form.brand }}
+
+                        </div>
+
+
+                        <div class="home-form-field">
+
+                            <label
+                                for="{{ home_find_car_form.model_name.id_for_label }}"
+                            >
+                                Model
+                            </label>
+
+                            {{ home_find_car_form.model_name }}
+
+                        </div>
+
+
+                        <div class="home-form-field">
+
+                            <label
+                                for="{{ home_find_car_form.budget_max.id_for_label }}"
+                            >
+                                Buget maxim (€) *
+                            </label>
+
+                            {{ home_find_car_form.budget_max }}
+
+                        </div>
+
+
+                        <div class="home-form-field">
+
+                            <label
+                                for="{{ home_find_car_form.year_min.id_for_label }}"
+                            >
+                                An minim
+                            </label>
+
+                            {{ home_find_car_form.year_min }}
+
+                        </div>
+
+
+                        <div class="home-form-field">
+
+                            <label
+                                for="{{ home_find_car_form.fuel.id_for_label }}"
+                            >
+                                Combustibil
+                            </label>
+
+                            {{ home_find_car_form.fuel }}
+
+                        </div>
+
+
+                        <div class="home-form-field">
+
+                            <label
+                                for="{{ home_find_car_form.transmission.id_for_label }}"
+                            >
+                                Cutie de viteze
+                            </label>
+
+                            {{ home_find_car_form.transmission }}
+
+                        </div>
+
+
+                        <div class="home-form-field full">
+
+                            <label
+                                for="{{ home_find_car_form.max_mileage.id_for_label }}"
+                            >
+                                Kilometraj maxim
+                            </label>
+
+                            {{ home_find_car_form.max_mileage }}
+
+                        </div>
+
+
+                        <div class="home-form-field full">
+
+                            <label
+                                for="{{ home_find_car_form.notes.id_for_label }}"
+                            >
+                                Alte preferințe
+                            </label>
+
+                            {{ home_find_car_form.notes }}
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="home-consent">
+
+                        {{ home_find_car_form.privacy_consent }}
+
+                        <label
+                            for="{{ home_find_car_form.privacy_consent.id_for_label }}"
+                        >
+                            Sunt de acord ca datele furnizate să fie
+                            folosite pentru a fi contactat în legătură
+                            cu această cerere.
+                        </label>
+
+                    </div>
+
+
+
+                    <button
+                        type="submit"
+                        class="home-find-submit"
+                    >
+                        Trimite cererea pe WhatsApp
+                        <span>→</span>
+                    </button>
+
+
+                </form>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         REVIEWS
+    =================================================== -->
+
+    <section
+        class="home-reviews-section"
+        id="recenzii"
+    >
+
+        <div class="home-section-container">
+
+
+            {% if review_submitted %}
+
+                <div class="home-review-success">
+
+                    <div class="home-review-success-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Mulțumim pentru recenzie!
+                        </strong>
+
+                        <p>
+                            Recenzia ta a fost înregistrată și
+                            va apărea pe site după verificare.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+
+
+            <div class="home-section-heading">
+
+
+                <div>
+
+                    <p class="section-small">
+                        EXPERIENȚELE CLIENȚILOR
+                    </p>
+
+                    <h2>
+                        Recenzii
+                    </h2>
+
+                </div>
+
+
+
+                <div class="home-section-actions">
+
+
+                    <div
+                        class="carousel-controls"
+                        data-controls="reviewsCarousel"
+                    >
+
+                        <button
+                            type="button"
+                            class="carousel-arrow carousel-prev"
+                            aria-label="Recenziile anterioare"
+                        >
+                            ←
+                        </button>
+
+                        <button
+                            type="button"
+                            class="carousel-arrow carousel-next"
+                            aria-label="Următoarele recenzii"
+                        >
+                            →
+                        </button>
+
+                    </div>
+
+
+                    <a
+                        href="{% url 'reviews' %}"
+                        class="section-all-link"
+                    >
+                        Vezi toate recenziile
+                        <span>→</span>
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            {% if approved_reviews %}
+
+
+                <div
+                    class="home-carousel-track review-carousel"
+                    id="reviewsCarousel"
+                >
+
+
+                    {% for review in approved_reviews %}
+
+
+                        <article class="home-review-card">
+
+
+                            <div class="home-review-stars">
+
+                                {% if review.rating >= 1 %}★{% endif %}
+                                {% if review.rating >= 2 %}★{% endif %}
+                                {% if review.rating >= 3 %}★{% endif %}
+                                {% if review.rating >= 4 %}★{% endif %}
+                                {% if review.rating >= 5 %}★{% endif %}
+
+                            </div>
+
+
+                            <p class="home-review-text">
+                                “{{ review.comment }}”
+                            </p>
+
+
+                            <div class="home-review-author">
+
+
+                                <div class="home-review-avatar">
+                                    {{ review.customer_name|first|upper }}
+                                </div>
+
+
+                                <div>
+
+                                    <strong>
+                                        {{ review.customer_name }}
+                                    </strong>
+
+
+                                    {% if review.car_model %}
+
+                                        <span>
+                                            {{ review.car_model }}
+                                        </span>
+
+                                    {% endif %}
+
+
+                                    <span class="home-review-date">
+
+                                        {% if review.review_date %}
+
+                                            {{ review.review_date|date:"d.m.Y" }}
+
+                                        {% else %}
+
+                                            {{ review.created_at|date:"d.m.Y" }}
+
+                                        {% endif %}
+
+                                    </span>
+
+
+                                </div>
+
+
+                            </div>
+
+
+                        </article>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            {% else %}
+
+
+                <div class="home-empty-state">
+
+                    <p>
+                        Primele recenzii vor apărea aici.
+                    </p>
+
+                </div>
+
+
+            {% endif %}
+
+
+
+            <!-- ==================================================
+                 LEAVE REVIEW
+            =================================================== -->
+
+            <div class="home-leave-review">
+
+
+                <div class="home-leave-review-intro">
+
+
+                    <p class="section-small">
+                        AI CUMPĂRAT DE LA NOI?
+                    </p>
+
+
+                    <h2>
+                        Lasă-ne o recenzie
+                    </h2>
+
+
+                    <p>
+
+                        Experiența ta îi poate ajuta și pe
+                        alți oameni să ia o decizie mai informată.
+
+                        Recenzia va fi verificată înainte să apară
+                        public pe site.
+
+                    </p>
+
+
+                </div>
+
+
+
+                <form
+                    method="post"
+                    action="{% url 'home' %}#recenzii"
+                    class="home-review-form"
+                >
+
+                    {% csrf_token %}
+
+
+                    <input
+                        type="hidden"
+                        name="form_type"
+                        value="review"
+                    >
+
+
+
+                    <div class="home-review-form-grid">
+
+
+                        <div class="home-form-field">
+
+                            <label
+                                for="{{ home_review_form.customer_name.id_for_label }}"
+                            >
+                                Nume *
+                            </label>
+
+                            {{ home_review_form.customer_name }}
+
+                        </div>
+
+
+
+                        <div class="home-form-field">
+
+                            <label
+                                for="{{ home_review_form.rating.id_for_label }}"
+                            >
+                                Evaluare *
+                            </label>
+
+                            {{ home_review_form.rating }}
+
+                        </div>
+
+
+
+                        <div class="home-form-field full">
+
+                            <label
+                                for="{{ home_review_form.car_model.id_for_label }}"
+                            >
+                                Mașina cumpărată
+
+                                <span class="optional-label">
+                                    opțional
+                                </span>
+
+                            </label>
+
+                            {{ home_review_form.car_model }}
+
+                        </div>
+
+
+
+                        <div class="home-form-field full">
+
+                            <label
+                                for="{{ home_review_form.comment.id_for_label }}"
+                            >
+                                Recenzia ta *
+                            </label>
+
+                            {{ home_review_form.comment }}
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="home-consent">
+
+                        {{ home_review_form.publish_consent }}
+
+                        <label
+                            for="{{ home_review_form.publish_consent.id_for_label }}"
+                        >
+                            Sunt de acord ca recenzia și numele meu
+                            să fie afișate public pe site.
+                        </label>
+
+                    </div>
+
+
+
+                    <button
+                        type="submit"
+                        class="home-review-submit"
+                    >
+                        Trimite recenzia
+                        <span>→</span>
+                    </button>
+
+
+                </form>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         CONTACT
+    =================================================== -->
+
+    <section
+        class="home-contact-section"
+        id="contact"
+    >
+
+        <div class="home-section-container">
+
+
+            <div class="home-contact-layout">
+
+
+                <div class="home-contact-info">
+
+
+                    <p class="section-small">
+                        CONTACT AUTO CARS GML
+                    </p>
+
+
+                    <h2>
+                        Hai să vorbim.
+                    </h2>
+
+
+                    <p class="home-contact-intro">
+
+                        Ai întrebări despre o mașină, vrei să
+                        programezi o vizionare sau cauți un anumit model?
+
+                    </p>
+
+
+
+                    <div class="home-contact-cards">
+
+
+                        <a
+                            href="https://wa.me/40757337253?text=Bun%C4%83%20ziua!%20V%C4%83%20contactez%20de%20pe%20site-ul%20Auto%20Cars%20GML."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="home-contact-card"
+                        >
+
+                            <span>
+                                WHATSAPP
+                            </span>
+
+                            <strong>
+                                Scrie-ne pe WhatsApp
+                            </strong>
+
+                            <p>
+                                Cel mai rapid mod de a lua legătura cu noi.
+                            </p>
+
+                        </a>
+
+
+
+                        <button
+                            type="button"
+                            class="home-contact-card"
+                            id="homeCallButton"
+                        >
+
+                            <span>
+                                TELEFON
+                            </span>
+
+                            <strong>
+                                +40 757 337 253
+                            </strong>
+
+                            <p>
+                                Apasă pentru a ne contacta.
+                            </p>
+
+                        </button>
+
+
+
+                        <div class="home-contact-card">
+
+                            <span>
+                                LOCAȚIE
+                            </span>
+
+                            <strong>
+                                Piața Auto Korona
+                            </strong>
+
+                            <p>
+                                Brașov, România
+                                <br>
+                                45°39'45.8"N, 25°33'23.3"E
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="home-contact-map-wrap">
+
+
+                    <div
+                        id="homeContactMap"
+                        class="home-contact-map"
+                    ></div>
+
+
+                    <a
+                        href="https://www.google.com/maps/search/?api=1&query=45.6627222,25.5564722"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="home-map-button"
+                    >
+                        Deschide în Google Maps
+                        <span>↗</span>
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         PHONE MODAL
+    =================================================== -->
+
+    <div
+        class="home-phone-modal"
+        id="homePhoneModal"
+    >
+
+        <div
+            class="home-phone-overlay"
+            id="homePhoneOverlay"
+        ></div>
+
+
+        <div class="home-phone-box">
+
+
+            <button
+                type="button"
+                id="homePhoneClose"
+                aria-label="Închide"
+            >
+                ×
+            </button>
+
+
+            <p class="section-small">
+                CONTACT AUTO CARS GML
+            </p>
+
+
+            <h2>
+                Sună-ne la
+            </h2>
+
+
+            <div>
+                +40 757 337 253
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ==================================================
+         LEAFLET
+    =================================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"
+        crossorigin="anonymous"
+    ></script>
+
+
+
+    <!-- ==================================================
+         HOMEPAGE JAVASCRIPT
+    =================================================== -->
+
+    <script>
+
+
+        /*
+        ==========================================
+        CAR / REVIEW CAROUSELS
+        ==========================================
+        */
+
+
+        document.querySelectorAll(
+            ".carousel-controls"
+        ).forEach(
+            function(controls) {
+
+
+                const carouselId =
+                    controls.dataset.controls;
+
+
+                const carousel =
+                    document.getElementById(
+                        carouselId
+                    );
+
+
+                if (!carousel) {
+                    return;
+                }
+
+
+                const previous =
+                    controls.querySelector(
+                        ".carousel-prev"
+                    );
+
+
+                const next =
+                    controls.querySelector(
+                        ".carousel-next"
+                    );
+
+
+
+                function getScrollDistance() {
+
+
+                    const firstItem =
+                        carousel.firstElementChild;
+
+
+                    if (!firstItem) {
+                        return 0;
+                    }
+
+
+                    const styles =
+                        window.getComputedStyle(
+                            carousel
+                        );
+
+
+                    const gap =
+                        parseFloat(
+                            styles.columnGap
+                        ) || 0;
+
+
+                    return (
+                        firstItem.getBoundingClientRect().width
+                        + gap
+                    );
+
+                }
+
+
+
+                function updateButtons() {
+
+
+                    const maxScroll =
+                        carousel.scrollWidth
+                        - carousel.clientWidth;
+
+
+                    if (maxScroll <= 3) {
+
+                        controls.classList.add(
+                            "carousel-controls-hidden"
+                        );
+
+                        return;
+
+                    }
+
+
+                    controls.classList.remove(
+                        "carousel-controls-hidden"
+                    );
+
+
+                    previous.disabled =
+                        carousel.scrollLeft <= 3;
+
+
+                    next.disabled =
+                        carousel.scrollLeft
+                        >= maxScroll - 3;
+
+                }
+
+
+
+                previous.addEventListener(
+                    "click",
+                    function() {
+
+                        carousel.scrollBy({
+                            left:
+                                -getScrollDistance(),
+                            behavior: "smooth"
+                        });
+
+                    }
+                );
+
+
+                next.addEventListener(
+                    "click",
+                    function() {
+
+                        carousel.scrollBy({
+                            left:
+                                getScrollDistance(),
+                            behavior: "smooth"
+                        });
+
+                    }
+                );
+
+
+                carousel.addEventListener(
+                    "scroll",
+                    updateButtons,
+                    {
+                        passive: true
+                    }
+                );
+
+
+                window.addEventListener(
+                    "resize",
+                    updateButtons
+                );
+
+
+                updateButtons();
+
+
+            }
+        );
+
+
+
+        /*
+        ==========================================
+        CONTACT MAP
+        ==========================================
+        */
+
+
+        const mapContainer =
+            document.getElementById(
+                "homeContactMap"
+            );
+
+
+        if (
+            mapContainer
+            &&
+            typeof L !== "undefined"
+        ) {
+
+
+            const coordinates = [
+                45.6627222,
+                25.5564722
+            ];
+
+
+            const map =
+                L.map(
+                    "homeContactMap"
+                ).setView(
+                    coordinates,
+                    17
+                );
+
+
+            L.tileLayer(
+                "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+                {
+                    maxZoom: 19,
+                    attribution: "Tiles © Esri"
+                }
+            ).addTo(
+                map
+            );
+
+
+            L.marker(
+                coordinates
+            )
+            .addTo(
+                map
+            )
+            .bindPopup(
+                "<strong>Piața Auto Korona</strong><br>Auto Cars GML"
+            );
+
+
+        }
+
+
+
+        /*
+        ==========================================
+        CONTACT PHONE
+        ==========================================
+        */
+
+
+        const homeCallButton =
+            document.getElementById(
+                "homeCallButton"
+            );
+
+
+        const homePhoneModal =
+            document.getElementById(
+                "homePhoneModal"
+            );
+
+
+        const homePhoneClose =
+            document.getElementById(
+                "homePhoneClose"
+            );
+
+
+        const homePhoneOverlay =
+            document.getElementById(
+                "homePhoneOverlay"
+            );
+
+
+        function isMobilePhone() {
+
+            return (
+                /android/i.test(
+                    navigator.userAgent
+                )
+                ||
+                /iPhone|iPod/i.test(
+                    navigator.userAgent
+                )
+            );
+
+        }
+
+
+        function closeHomePhoneModal() {
+
+            if (!homePhoneModal) {
+                return;
+            }
+
+
+            homePhoneModal.classList.remove(
+                "show"
+            );
+
+        }
+
+
+        if (homeCallButton) {
+
+            homeCallButton.addEventListener(
+                "click",
+                function() {
+
+                    if (
+                        isMobilePhone()
+                    ) {
+
+                        window.location.href =
+                            "tel:+40757337253";
+
+                    } else {
+
+                        homePhoneModal.classList.add(
+                            "show"
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        if (homePhoneClose) {
+
+            homePhoneClose.addEventListener(
+                "click",
+                closeHomePhoneModal
+            );
+
+        }
+
+
+        if (homePhoneOverlay) {
+
+            homePhoneOverlay.addEventListener(
+                "click",
+                closeHomePhoneModal
+            );
+
+        }
+
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    closeHomePhoneModal();
+
+                }
+
+            }
+        );
+
+
+    </script>
+
+
+
+    <script
+        src="{% static 'dealership/mobile_nav.js' %}"
+    ></script>
+
+
+</body>
+
+</html>

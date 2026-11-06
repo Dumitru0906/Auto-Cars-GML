@@ -1,0 +1,1139 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="ro">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Contact | Auto Cars GML
+    </title>
+
+
+    <link
+        rel="stylesheet"
+        href="{% static 'dealership/style.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'dealership/mobile_nav.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'dealership/info_pages.css' %}"
+    >
+
+
+    <!-- LEAFLET MAP -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin="anonymous"
+    >
+
+</head>
+
+
+<body>
+
+
+    {% include 'dealership/header.html' %}
+
+
+
+    <!-- ==================================================
+         HERO
+    =================================================== -->
+
+    <section class="info-hero contact-hero">
+
+        <div class="info-container">
+
+            <p class="info-eyebrow">
+                CONTACT AUTO CARS GML
+            </p>
+
+            <h1>
+                Hai să
+                <span>vorbim.</span>
+            </h1>
+
+            <p>
+
+                Ai întrebări despre o mașină, vrei să programezi
+                o vizionare sau cauți un anumit model?
+
+                Contactează-ne direct prin WhatsApp sau telefon.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         CONTACT PAGE
+    =================================================== -->
+
+    <main class="contact-page">
+
+        <div class="info-container">
+
+
+            <div class="contact-layout">
+
+
+                <!-- ==================================================
+                     LEFT
+                =================================================== -->
+
+                <section class="contact-main">
+
+
+                    <p class="section-label">
+                        CONTACT DIRECT
+                    </p>
+
+
+                    <h2>
+                        Suntem aici să te ajutăm
+                    </h2>
+
+
+
+                    <div class="contact-cards">
+
+
+                        <!-- ==========================================
+                             WHATSAPP
+                        =========================================== -->
+
+                        <a
+                            href="https://wa.me/40757337253?text=Bun%C4%83%20ziua!%20V%C4%83%20contactez%20de%20pe%20site-ul%20Auto%20Cars%20GML."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="contact-card primary"
+                        >
+
+                            <div class="contact-card-icon">
+                                W
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    WHATSAPP
+                                </span>
+
+                                <strong>
+                                    Scrie-ne pe WhatsApp
+                                </strong>
+
+                                <p>
+                                    Cel mai rapid mod de a lua
+                                    legătura cu noi.
+                                </p>
+
+                            </div>
+
+
+                            <div class="contact-arrow">
+                                →
+                            </div>
+
+                        </a>
+
+
+
+                        <!-- ==========================================
+                             PHONE
+                        =========================================== -->
+
+                        <button
+                            type="button"
+                            class="contact-card"
+                            id="contactCallButton"
+                        >
+
+                            <div class="contact-card-icon">
+                                ☎
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    TELEFON
+                                </span>
+
+                                <strong>
+                                    +40 757 337 253
+                                </strong>
+
+                                <p>
+                                    Apasă pentru a suna sau pentru
+                                    a vedea numărul.
+                                </p>
+
+                            </div>
+
+
+                            <div class="contact-arrow">
+                                →
+                            </div>
+
+                        </button>
+
+
+
+                        <!-- ==========================================
+                             LOCATION
+                        =========================================== -->
+
+                        <div class="location-contact-card">
+
+
+                            <div class="location-contact-info">
+
+
+                                <div class="contact-card-icon">
+                                    ◉
+                                </div>
+
+
+                                <div class="location-text">
+
+                                    <span>
+                                        LOCAȚIE
+                                    </span>
+
+
+                                    <strong>
+                                        Piața Auto Korona
+                                    </strong>
+
+
+                                    <p class="location-city">
+                                        Brașov, România
+                                    </p>
+
+
+                                    <p class="location-coordinates">
+                                        45°39'45.8"N
+                                        &nbsp;
+                                        25°33'23.3"E
+                                    </p>
+
+
+                                    <p class="location-note">
+
+                                        Contactează-ne înainte pentru
+                                        programarea unei vizionări.
+
+                                    </p>
+
+                                </div>
+
+
+                            </div>
+
+
+
+                            <!-- SATELLITE PREVIEW -->
+
+                            <button
+                                type="button"
+                                class="map-preview-button"
+                                id="openLocationMap"
+                                aria-label="Deschide harta interactivă"
+                            >
+
+
+                                <div
+                                    id="miniLocationMap"
+                                    class="mini-location-map"
+                                ></div>
+
+
+                                <div class="map-preview-shade"></div>
+
+
+                                <div class="map-preview-content">
+
+                                    <span>
+                                        VEDERE SATELIT
+                                    </span>
+
+                                    <strong>
+                                        Deschide harta
+                                    </strong>
+
+                                    <div class="map-preview-arrow">
+                                        ↗
+                                    </div>
+
+                                </div>
+
+
+                            </button>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </section>
+
+
+
+                <!-- ==================================================
+                     RIGHT
+                =================================================== -->
+
+                <aside class="contact-side">
+
+
+                    <div class="contact-side-box">
+
+                        <p class="section-label">
+                            AI GĂSIT O MAȘINĂ?
+                        </p>
+
+                        <h3>
+                            Programează o discuție
+                        </h3>
+
+                        <p>
+
+                            Dacă te interesează o anumită mașină,
+                            spune-ne modelul și îți putem oferi
+                            informațiile necesare înainte de vizionare.
+
+                        </p>
+
+
+                        <a
+                            href="{% url 'inventory' %}#disponibile"
+                            class="contact-stock-button"
+                        >
+                            Vezi mașinile disponibile
+                            <span>→</span>
+                        </a>
+
+                    </div>
+
+
+
+                    <div class="contact-side-box find-box">
+
+                        <p class="section-label">
+                            NU AI GĂSIT-O ÎN STOC?
+                        </p>
+
+                        <h3>
+                            Găsește-mi o mașină
+                        </h3>
+
+                        <p>
+
+                            Spune-ne marca, modelul, bugetul și
+                            preferințele tale, iar cererea ta
+                            ajunge direct la noi prin WhatsApp.
+
+                        </p>
+
+
+                        <a
+                            href="{% url 'find_car' %}"
+                            class="contact-find-button"
+                        >
+                            Fă o cerere personalizată
+                            <span>→</span>
+                        </a>
+
+                    </div>
+
+
+                </aside>
+
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+
+    <!-- ==================================================
+         DESKTOP PHONE POPUP
+    =================================================== -->
+
+    <div
+        class="contact-phone-modal"
+        id="contactPhoneModal"
+    >
+
+        <div
+            class="contact-phone-overlay"
+            id="contactPhoneOverlay"
+        ></div>
+
+
+        <div class="contact-phone-box">
+
+
+            <button
+                type="button"
+                class="contact-phone-close"
+                id="contactPhoneClose"
+            >
+                ×
+            </button>
+
+
+            <p class="section-label">
+                CONTACT AUTO CARS GML
+            </p>
+
+
+            <h2>
+                Sună-ne la
+            </h2>
+
+
+            <div class="contact-phone-number">
+                +40 757 337 253
+            </div>
+
+
+            <p>
+                Introdu acest număr pe telefonul tău
+                pentru a ne contacta.
+            </p>
+
+
+            <button
+                type="button"
+                class="copy-phone"
+                id="copyPhoneButton"
+            >
+                Copiază numărul
+            </button>
+
+
+            <span
+                class="copy-confirmation"
+                id="copyConfirmation"
+            >
+                Număr copiat ✓
+            </span>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         LOCATION MAP POPUP
+    =================================================== -->
+
+    <div
+        class="location-map-modal"
+        id="locationMapModal"
+        aria-hidden="true"
+    >
+
+
+        <div
+            class="location-map-overlay"
+            id="locationMapOverlay"
+        ></div>
+
+
+
+        <div
+            class="location-map-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="locationMapTitle"
+        >
+
+
+            <!-- MAP HEADER -->
+
+            <div class="location-map-header">
+
+
+                <div>
+
+                    <p class="section-label">
+                        LOCAȚIA AUTO CARS GML
+                    </p>
+
+                    <h2 id="locationMapTitle">
+                        Piața Auto Korona
+                    </h2>
+
+                    <p>
+                        Brașov, România
+                    </p>
+
+                </div>
+
+
+
+                <button
+                    type="button"
+                    class="location-map-close"
+                    id="locationMapClose"
+                    aria-label="Închide harta"
+                >
+                    ×
+                </button>
+
+
+            </div>
+
+
+
+            <!-- LARGE INTERACTIVE MAP -->
+
+            <div
+                id="fullLocationMap"
+                class="full-location-map"
+            ></div>
+
+
+
+            <!-- MAP FOOTER -->
+
+            <div class="location-map-footer">
+
+
+                <div>
+
+                    <span>
+                        COORDONATE
+                    </span>
+
+                    <strong>
+                        45°39'45.8"N, 25°33'23.3"E
+                    </strong>
+
+                </div>
+
+
+                <a
+                    href="https://www.google.com/maps/search/?api=1&query=45.6627222,25.5564722"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="google-maps-button"
+                >
+                    Deschide în Google Maps
+                    <span>↗</span>
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ==================================================
+         LEAFLET
+    =================================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin="anonymous"
+    ></script>
+
+
+
+    <!-- ==================================================
+         CONTACT + MAP JAVASCRIPT
+    =================================================== -->
+
+    <script>
+
+
+        /* ==================================================
+           PHONE
+        ================================================== */
+
+
+        const callButton =
+            document.getElementById(
+                "contactCallButton"
+            );
+
+
+        const phoneModal =
+            document.getElementById(
+                "contactPhoneModal"
+            );
+
+
+        const phoneCloseButton =
+            document.getElementById(
+                "contactPhoneClose"
+            );
+
+
+        const phoneOverlay =
+            document.getElementById(
+                "contactPhoneOverlay"
+            );
+
+
+        const copyButton =
+            document.getElementById(
+                "copyPhoneButton"
+            );
+
+
+        const copyConfirmation =
+            document.getElementById(
+                "copyConfirmation"
+            );
+
+
+
+        function isPhone() {
+
+            const ua =
+                navigator.userAgent
+                || navigator.vendor
+                || window.opera;
+
+
+            return (
+                /android/i.test(ua)
+                ||
+                /iPhone|iPod/i.test(ua)
+            );
+
+        }
+
+
+
+        function openPhoneModal() {
+
+            phoneModal.classList.add(
+                "show"
+            );
+
+            document.body.classList.add(
+                "contact-modal-open"
+            );
+
+        }
+
+
+
+        function closePhoneModal() {
+
+            phoneModal.classList.remove(
+                "show"
+            );
+
+            document.body.classList.remove(
+                "contact-modal-open"
+            );
+
+        }
+
+
+
+        callButton.addEventListener(
+            "click",
+            function () {
+
+                if (isPhone()) {
+
+                    window.location.href =
+                        "tel:+40757337253";
+
+                } else {
+
+                    openPhoneModal();
+
+                }
+
+            }
+        );
+
+
+
+        phoneCloseButton.addEventListener(
+            "click",
+            closePhoneModal
+        );
+
+
+        phoneOverlay.addEventListener(
+            "click",
+            closePhoneModal
+        );
+
+
+
+        copyButton.addEventListener(
+            "click",
+            async function () {
+
+                try {
+
+                    await navigator.clipboard.writeText(
+                        "+40757337253"
+                    );
+
+
+                    copyConfirmation.classList.add(
+                        "show"
+                    );
+
+
+                    setTimeout(
+                        function () {
+
+                            copyConfirmation.classList.remove(
+                                "show"
+                            );
+
+                        },
+                        1800
+                    );
+
+
+                } catch (error) {
+
+                    copyButton.textContent =
+                        "+40 757 337 253";
+
+                }
+
+            }
+        );
+
+
+
+        /* ==================================================
+           MAP SETTINGS
+        ================================================== */
+
+
+        const dealershipCoordinates = [
+            45.6627222,
+            25.5564722
+        ];
+
+
+        const satelliteTiles =
+            "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
+
+
+        const streetTiles =
+            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
+
+
+        const satelliteAttribution =
+            "Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community";
+
+
+        const streetAttribution =
+            "© OpenStreetMap contributors";
+
+
+
+        /* ==================================================
+           CUSTOM MARKER
+        ================================================== */
+
+
+        const dealershipIcon = L.divIcon({
+
+            className: "dealership-map-icon",
+
+            html:
+                '<div class="dealership-marker">'
+                + '<div class="dealership-marker-center"></div>'
+                + '</div>',
+
+            iconSize: [
+                32,
+                32
+            ],
+
+            iconAnchor: [
+                16,
+                16
+            ]
+
+        });
+
+
+
+        /* ==================================================
+           MINI SATELLITE PREVIEW
+        ================================================== */
+
+
+        const miniMap =
+            L.map(
+                "miniLocationMap",
+                {
+
+                    zoomControl: false,
+
+                    attributionControl: false,
+
+                    dragging: false,
+
+                    scrollWheelZoom: false,
+
+                    doubleClickZoom: false,
+
+                    boxZoom: false,
+
+                    keyboard: false,
+
+                    touchZoom: false
+
+                }
+            ).setView(
+                dealershipCoordinates,
+                17
+            );
+
+
+
+        L.tileLayer(
+            satelliteTiles,
+            {
+
+                maxZoom: 19,
+
+                attribution:
+                    satelliteAttribution
+
+            }
+        ).addTo(
+            miniMap
+        );
+
+
+
+        L.marker(
+            dealershipCoordinates,
+            {
+                icon: dealershipIcon
+            }
+        ).addTo(
+            miniMap
+        );
+
+
+
+        /* ==================================================
+           LARGE MAP MODAL
+        ================================================== */
+
+
+        const openMapButton =
+            document.getElementById(
+                "openLocationMap"
+            );
+
+
+        const mapModal =
+            document.getElementById(
+                "locationMapModal"
+            );
+
+
+        const mapCloseButton =
+            document.getElementById(
+                "locationMapClose"
+            );
+
+
+        const mapOverlay =
+            document.getElementById(
+                "locationMapOverlay"
+            );
+
+
+        let fullMap = null;
+
+
+
+        function createFullMap() {
+
+
+            if (fullMap) {
+
+                return;
+
+            }
+
+
+
+            const satelliteLayer =
+                L.tileLayer(
+                    satelliteTiles,
+                    {
+
+                        maxZoom: 19,
+
+                        attribution:
+                            satelliteAttribution
+
+                    }
+                );
+
+
+
+            const streetLayer =
+                L.tileLayer(
+                    streetTiles,
+                    {
+
+                        maxZoom: 19,
+
+                        attribution:
+                            streetAttribution
+
+                    }
+                );
+
+
+
+            fullMap =
+                L.map(
+                    "fullLocationMap",
+                    {
+
+                        center:
+                            dealershipCoordinates,
+
+                        zoom: 17,
+
+                        layers: [
+                            satelliteLayer
+                        ],
+
+                        scrollWheelZoom: true
+
+                    }
+                );
+
+
+
+            const marker =
+                L.marker(
+                    dealershipCoordinates,
+                    {
+                        icon:
+                            dealershipIcon
+                    }
+                ).addTo(
+                    fullMap
+                );
+
+
+
+            marker.bindPopup(
+                "<strong>Piața Auto Korona</strong>"
+                + "<br>"
+                + "Auto Cars GML"
+                + "<br>"
+                + "Brașov"
+            );
+
+
+
+            L.control.layers(
+                {
+
+                    "Satelit":
+                        satelliteLayer,
+
+                    "Hartă":
+                        streetLayer
+
+                }
+            ).addTo(
+                fullMap
+            );
+
+        }
+
+
+
+        function openMapModal() {
+
+
+            mapModal.classList.add(
+                "show"
+            );
+
+
+            mapModal.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+
+            document.body.classList.add(
+                "contact-modal-open"
+            );
+
+
+            createFullMap();
+
+
+            setTimeout(
+                function () {
+
+                    fullMap.invalidateSize();
+
+
+                    fullMap.setView(
+                        dealershipCoordinates,
+                        17
+                    );
+
+                },
+                250
+            );
+
+        }
+
+
+
+        function closeMapModal() {
+
+
+            mapModal.classList.remove(
+                "show"
+            );
+
+
+            mapModal.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+
+            document.body.classList.remove(
+                "contact-modal-open"
+            );
+
+        }
+
+
+
+        openMapButton.addEventListener(
+            "click",
+            openMapModal
+        );
+
+
+        mapCloseButton.addEventListener(
+            "click",
+            closeMapModal
+        );
+
+
+        mapOverlay.addEventListener(
+            "click",
+            closeMapModal
+        );
+
+
+
+        /* ==================================================
+           ESCAPE CLOSES EITHER POPUP
+        ================================================== */
+
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key !== "Escape"
+                ) {
+
+                    return;
+
+                }
+
+
+                if (
+                    mapModal.classList.contains(
+                        "show"
+                    )
+                ) {
+
+                    closeMapModal();
+
+                    return;
+
+                }
+
+
+                if (
+                    phoneModal.classList.contains(
+                        "show"
+                    )
+                ) {
+
+                    closePhoneModal();
+
+                }
+
+            }
+        );
+
+
+    </script>
+
+
+
+    <script
+        src="{% static 'dealership/mobile_nav.js' %}"
+    ></script>
+
+
+</body>
+
+</html>

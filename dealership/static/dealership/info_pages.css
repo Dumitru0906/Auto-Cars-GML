@@ -1,0 +1,1627 @@
+/* ==================================================
+   COMMON
+================================================== */
+
+.info-container {
+    width: 86%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+
+.info-hero {
+    padding: 75px 0 70px;
+
+    background:
+        radial-gradient(
+            circle at 80% 15%,
+            #282313,
+            #101010 43%,
+            #080808 78%
+        );
+
+    border-bottom: 1px solid #252525;
+}
+
+
+.info-eyebrow,
+.section-label {
+    margin: 0 0 10px;
+
+    color: #ddb84f;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 2.5px;
+}
+
+
+.info-hero h1 {
+    max-width: 800px;
+
+    margin: 0 0 20px;
+
+    color: white;
+
+    font-size: 57px;
+
+    line-height: 1.05;
+}
+
+
+.info-hero h1 span {
+    color: #ddb84f;
+}
+
+
+.info-hero > .info-container > p:last-child {
+    max-width: 700px;
+
+    margin: 0;
+
+    color: #aaa;
+
+    font-size: 16px;
+
+    line-height: 1.7;
+}
+
+
+/* ==================================================
+   REVIEWS PAGE
+================================================== */
+
+.reviews-page {
+    padding: 60px 0 90px;
+
+    background: #f3f3f3;
+
+    color: #111;
+}
+
+
+.review-success {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 35px;
+
+    padding: 18px 20px;
+
+    background: #e9f5e8;
+
+    border: 1px solid #c7dfc4;
+
+    border-radius: 7px;
+}
+
+
+.review-success-icon {
+    width: 38px;
+    height: 38px;
+
+    flex: 0 0 auto;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+
+    background: #528a4c;
+
+    border-radius: 50%;
+
+    font-weight: 800;
+}
+
+
+.review-success strong {
+    display: block;
+
+    margin-bottom: 3px;
+}
+
+
+.review-success p {
+    margin: 0;
+
+    color: #567052;
+
+    font-size: 12px;
+}
+
+
+.reviews-heading {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    margin-bottom: 25px;
+}
+
+
+.reviews-heading h2 {
+    margin: 0;
+
+    font-size: 35px;
+}
+
+
+.reviews-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 22px;
+}
+
+
+.review-card {
+    padding: 28px;
+
+    background: white;
+
+    border: 1px solid #dedede;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.04);
+}
+
+
+.review-stars {
+    margin-bottom: 18px;
+
+    color: #ddb84f;
+
+    font-size: 18px;
+
+    letter-spacing: 2px;
+}
+
+
+.review-text {
+    min-height: 100px;
+
+    margin: 0 0 25px;
+
+    color: #555;
+
+    font-size: 14px;
+
+    line-height: 1.75;
+}
+
+
+.review-author {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.review-avatar {
+    width: 42px;
+    height: 42px;
+
+    flex: 0 0 auto;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    color: #111;
+
+    background: #ddb84f;
+
+    border-radius: 50%;
+
+    font-weight: 800;
+}
+
+
+.review-author strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    font-size: 13px;
+}
+
+
+.review-author span {
+    color: #888;
+
+    font-size: 11px;
+}
+
+
+/* ==================================================
+   EMPTY REVIEWS
+================================================== */
+
+.reviews-empty {
+    padding: 55px 25px;
+
+    text-align: center;
+
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+}
+
+
+.reviews-empty-star {
+    margin-bottom: 15px;
+
+    color: #ddb84f;
+
+    font-size: 35px;
+}
+
+
+.reviews-empty h3 {
+    margin-bottom: 10px;
+}
+
+
+.reviews-empty p {
+    max-width: 600px;
+
+    margin: 0 auto;
+
+    color: #777;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* ==================================================
+   LEAVE REVIEW
+================================================== */
+
+.leave-review {
+    display: grid;
+
+    grid-template-columns:
+        minmax(250px, 0.5fr)
+        minmax(0, 1fr);
+
+    gap: 60px;
+
+    margin-top: 65px;
+
+    padding-top: 55px;
+
+    border-top: 1px solid #d8d8d8;
+}
+
+
+.leave-review-intro h2 {
+    margin: 0 0 13px;
+
+    font-size: 31px;
+}
+
+
+.leave-review-intro > p:last-child {
+    color: #777;
+
+    font-size: 13px;
+
+    line-height: 1.65;
+}
+
+
+.review-form {
+    padding: 30px;
+
+    background: white;
+
+    border: 1px solid #dedede;
+
+    border-radius: 8px;
+}
+
+
+.review-form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+.info-form-field.full {
+    grid-column: 1 / -1;
+}
+
+
+.info-form-field label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+.info-form-field label span {
+    color: #999;
+
+    font-weight: 400;
+}
+
+
+.info-form-field input,
+.info-form-field select,
+.info-form-field textarea {
+    width: 100%;
+
+    min-height: 48px;
+
+    padding: 0 13px;
+
+    font-family: inherit;
+
+    background: #fafafa;
+
+    border: 1px solid #d5d5d5;
+
+    border-radius: 5px;
+
+    outline: none;
+
+    font-size: 14px;
+}
+
+
+.info-form-field textarea {
+    min-height: 130px;
+
+    padding-top: 12px;
+
+    resize: vertical;
+}
+
+
+.info-form-field input:focus,
+.info-form-field select:focus,
+.info-form-field textarea:focus {
+    background: white;
+
+    border-color: #ddb84f;
+
+    box-shadow:
+        0 0 0 3px rgba(221, 184, 79, 0.13);
+}
+
+
+.review-consent {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+
+.review-consent input {
+    width: 17px;
+    height: 17px;
+
+    margin-top: 2px;
+
+    flex: 0 0 auto;
+}
+
+
+.review-consent label {
+    color: #666;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+.form-error {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #b63030;
+
+    font-size: 11px;
+}
+
+
+.review-submit {
+    width: 100%;
+
+    min-height: 52px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 22px;
+
+    color: #111;
+
+    background: #ddb84f;
+
+    border: none;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 800;
+}
+
+
+.review-submit:hover {
+    background: #efd071;
+}
+
+
+/* ==================================================
+   CONTACT
+================================================== */
+
+.contact-page {
+    padding: 65px 0 90px;
+
+    background: #f3f3f3;
+
+    color: #111;
+}
+
+
+.contact-layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.2fr)
+        minmax(310px, 0.8fr);
+
+    gap: 40px;
+
+    align-items: start;
+}
+
+
+.contact-main > h2 {
+    margin: 0 0 28px;
+
+    font-size: 36px;
+}
+
+
+.contact-cards {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+
+.contact-card {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        52px
+        minmax(0, 1fr)
+        auto;
+
+    gap: 16px;
+
+    align-items: center;
+
+    padding: 22px;
+
+    color: #111;
+
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+    text-align: left;
+
+    text-decoration: none;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.contact-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #c7a548;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.07);
+}
+
+
+.contact-card.primary {
+    background: #111;
+
+    color: white;
+
+    border-color: #222;
+}
+
+
+.contact-card span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #ad892d;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.8px;
+}
+
+
+.contact-card strong {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 16px;
+}
+
+
+.contact-card p {
+    margin: 0;
+
+    color: #888;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+.contact-card.primary p {
+    color: #8f8f8f;
+}
+
+
+.contact-arrow {
+    font-size: 21px;
+
+    font-weight: 700;
+}
+
+
+/* ==================================================
+   LOCATION CARD
+================================================== */
+
+.location-contact-card {
+    overflow: hidden;
+
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+}
+
+
+.location-contact-info {
+    display: grid;
+
+    grid-template-columns:
+        52px
+        minmax(0, 1fr);
+
+    gap: 16px;
+
+    align-items: start;
+
+    padding: 22px;
+}
+
+
+.location-text > span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #ad892d;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.8px;
+}
+
+
+.location-text strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #111;
+
+    font-size: 18px;
+}
+
+
+.location-city {
+    margin: 0 0 9px;
+
+    color: #555;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+.location-coordinates {
+    margin: 0 0 11px;
+
+    color: #888;
+
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+
+    font-size: 11px;
+}
+
+
+.location-note {
+    margin: 0;
+
+    color: #888;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+/* ==================================================
+   SATELLITE PREVIEW
+================================================== */
+
+.map-preview-button {
+    position: relative;
+
+    width: 100%;
+    height: 220px;
+
+    display: block;
+
+    padding: 0;
+
+    overflow: hidden;
+
+    background: #171717;
+
+    border: none;
+    border-top: 1px solid #ddd;
+
+    cursor: pointer;
+
+    text-align: left;
+}
+
+
+.mini-location-map {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+
+    transition:
+        transform 0.4s ease;
+}
+
+
+.map-preview-button:hover .mini-location-map {
+    transform: scale(1.025);
+}
+
+
+.map-preview-shade {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.72),
+            rgba(0, 0, 0, 0.12) 70%
+        );
+
+    z-index: 400;
+}
+
+
+.map-preview-content {
+    position: absolute;
+
+    left: 22px;
+    bottom: 21px;
+
+    z-index: 500;
+
+    color: white;
+}
+
+
+.map-preview-content > span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #ddb84f;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.map-preview-content strong {
+    font-size: 18px;
+}
+
+
+.map-preview-arrow {
+    width: 35px;
+    height: 35px;
+
+    position: absolute;
+
+    left: calc(100% + 16px);
+    bottom: -6px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #111;
+
+    background: #ddb84f;
+
+    border-radius: 50%;
+
+    font-size: 16px;
+
+    font-weight: 800;
+}
+
+
+/* ==================================================
+   CUSTOM MAP MARKER
+================================================== */
+
+.dealership-map-icon {
+    background: transparent;
+
+    border: none;
+}
+
+
+.dealership-marker {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(221, 184, 79, 0.25);
+
+    border: 2px solid #ddb84f;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 3px 15px rgba(0, 0, 0, 0.55);
+}
+
+
+.dealership-marker-center {
+    width: 12px;
+    height: 12px;
+
+    background: #ddb84f;
+
+    border: 3px solid white;
+
+    border-radius: 50%;
+}
+
+
+/* ==================================================
+   CONTACT SIDE
+================================================== */
+
+.contact-side {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+
+.contact-side-box {
+    padding: 29px;
+
+    color: white;
+
+    background: #111;
+
+    border-radius: 8px;
+}
+
+
+.contact-side-box h3 {
+    margin: 0 0 12px;
+
+    font-size: 22px;
+}
+
+
+.contact-side-box > p:not(.section-label) {
+    margin: 0 0 24px;
+
+    color: #999;
+
+    font-size: 12px;
+
+    line-height: 1.65;
+}
+
+
+.contact-stock-button,
+.contact-find-button {
+    min-height: 49px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 16px;
+
+    border-radius: 5px;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+
+.contact-stock-button {
+    color: #111;
+
+    background: #ddb84f;
+}
+
+
+.contact-stock-button:hover {
+    background: #efd071;
+}
+
+
+.find-box {
+    color: #111;
+
+    background: #e8e0ca;
+}
+
+
+.find-box > p:not(.section-label) {
+    color: #6d6655;
+}
+
+
+.contact-find-button {
+    color: white;
+
+    background: #111;
+}
+
+
+/* ==================================================
+   PHONE MODAL
+================================================== */
+
+.contact-modal-open {
+    overflow: hidden;
+}
+
+
+.contact-phone-modal {
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    z-index: 2000;
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
+}
+
+
+.contact-phone-modal.show {
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+}
+
+
+.contact-phone-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.78);
+
+    backdrop-filter: blur(6px);
+}
+
+
+.contact-phone-box {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+    max-width: 500px;
+
+    padding: 42px;
+
+    text-align: center;
+
+    color: white;
+
+    background: #111;
+
+    border: 1px solid #333;
+
+    border-radius: 11px;
+
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.65);
+}
+
+
+.contact-phone-close {
+    position: absolute;
+
+    top: 12px;
+    right: 15px;
+
+    width: 37px;
+    height: 37px;
+
+    color: #888;
+
+    background: transparent;
+
+    border: none;
+
+    cursor: pointer;
+
+    font-size: 27px;
+}
+
+
+.contact-phone-box h2 {
+    margin: 0 0 20px;
+
+    font-size: 29px;
+}
+
+
+.contact-phone-number {
+    margin-bottom: 17px;
+
+    padding: 17px;
+
+    color: #ddb84f;
+
+    background: #080808;
+
+    border: 1px solid #333;
+
+    border-radius: 6px;
+
+    font-size: 27px;
+
+    font-weight: 800;
+}
+
+
+.contact-phone-box > p:not(.section-label) {
+    color: #888;
+
+    font-size: 12px;
+}
+
+
+.copy-phone {
+    min-height: 43px;
+
+    margin-top: 13px;
+
+    padding: 0 18px;
+
+    color: #111;
+
+    background: #ddb84f;
+
+    border: none;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-weight: 800;
+}
+
+
+.copy-confirmation {
+    display: block;
+
+    height: 17px;
+
+    margin-top: 10px;
+
+    color: #77aa72;
+
+    opacity: 0;
+
+    font-size: 11px;
+
+    transition: opacity 0.2s ease;
+}
+
+
+.copy-confirmation.show {
+    opacity: 1;
+}
+
+
+/* ==================================================
+   LOCATION MAP MODAL
+================================================== */
+
+.location-map-modal {
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 28px;
+
+    visibility: hidden;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 2200;
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
+}
+
+
+.location-map-modal.show {
+    visibility: visible;
+
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+
+.location-map-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        rgba(0, 0, 0, 0.82);
+
+    backdrop-filter: blur(7px);
+
+    -webkit-backdrop-filter: blur(7px);
+}
+
+
+.location-map-dialog {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(1100px, 100%);
+
+    overflow: hidden;
+
+    color: white;
+
+    background: #111;
+
+    border: 1px solid #333;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 30px 100px rgba(0, 0, 0, 0.75);
+
+    transform:
+        translateY(20px)
+        scale(0.98);
+
+    transition:
+        transform 0.25s ease;
+}
+
+
+.location-map-modal.show .location-map-dialog {
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+/* ==================================================
+   MAP HEADER
+================================================== */
+
+.location-map-header {
+    min-height: 105px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    padding: 22px 26px;
+
+    background: #111;
+
+    border-bottom: 1px solid #2d2d2d;
+}
+
+
+.location-map-header .section-label {
+    margin-bottom: 5px;
+}
+
+
+.location-map-header h2 {
+    margin: 0 0 4px;
+
+    font-size: 25px;
+}
+
+
+.location-map-header > div > p:last-child {
+    margin: 0;
+
+    color: #888;
+
+    font-size: 12px;
+}
+
+
+.location-map-close {
+    width: 42px;
+    height: 42px;
+
+    flex: 0 0 auto;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #999;
+
+    background: #1a1a1a;
+
+    border: 1px solid #333;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    font-size: 28px;
+
+    line-height: 1;
+
+    transition:
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.location-map-close:hover {
+    color: white;
+
+    border-color: #ddb84f;
+}
+
+
+/* ==================================================
+   LARGE MAP
+================================================== */
+
+.full-location-map {
+    width: 100%;
+
+    height: min(62vh, 610px);
+
+    min-height: 420px;
+
+    background: #222;
+}
+
+
+.location-map-dialog .leaflet-control-layers {
+    border: none;
+
+    border-radius: 5px;
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.25);
+}
+
+
+.location-map-dialog .leaflet-popup-content-wrapper,
+.location-map-dialog .leaflet-popup-tip {
+    color: #111;
+
+    background: white;
+}
+
+
+/* ==================================================
+   MAP FOOTER
+================================================== */
+
+.location-map-footer {
+    min-height: 80px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 16px 25px;
+
+    background: #111;
+
+    border-top: 1px solid #292929;
+}
+
+
+.location-map-footer > div > span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #777;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.6px;
+}
+
+
+.location-map-footer > div > strong {
+    color: #ddd;
+
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+
+    font-size: 12px;
+}
+
+
+.google-maps-button {
+    min-height: 44px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    padding: 0 16px;
+
+    color: #111;
+
+    background: #ddb84f;
+
+    border-radius: 5px;
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+
+.google-maps-button:hover {
+    background: #efd071;
+}
+
+
+/* ==================================================
+   TABLET
+================================================== */
+
+@media (max-width: 900px) {
+
+    .reviews-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .leave-review,
+    .contact-layout {
+        grid-template-columns: 1fr;
+    }
+
+
+    .location-map-dialog {
+        width: 100%;
+    }
+
+}
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media (max-width: 600px) {
+
+    .info-container {
+        width: 90%;
+    }
+
+
+    .info-hero {
+        padding: 55px 0;
+    }
+
+
+    .info-hero h1 {
+        font-size: 42px;
+    }
+
+
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .leave-review {
+        gap: 30px;
+    }
+
+
+    .review-form {
+        padding: 22px;
+    }
+
+
+    .review-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .info-form-field.full {
+        grid-column: auto;
+    }
+
+
+    .contact-card {
+        grid-template-columns:
+            45px
+            minmax(0, 1fr);
+
+        padding: 18px;
+    }
+
+
+    .contact-arrow {
+        display: none;
+    }
+
+
+    .location-contact-info {
+        grid-template-columns:
+            45px
+            minmax(0, 1fr);
+
+        padding: 18px;
+    }
+
+
+    .map-preview-button {
+        height: 190px;
+    }
+
+
+    .contact-phone-box {
+        padding: 38px 22px 28px;
+    }
+
+
+    .contact-phone-number {
+        font-size: 22px;
+    }
+
+
+    /* MAP MODAL */
+
+    .location-map-modal {
+        align-items: stretch;
+
+        padding: 0;
+    }
+
+
+    .location-map-dialog {
+        width: 100%;
+        height: 100%;
+
+        border: none;
+
+        border-radius: 0;
+
+        display: flex;
+
+        flex-direction: column;
+    }
+
+
+    .location-map-header {
+        min-height: 94px;
+
+        padding: 17px 18px;
+    }
+
+
+    .location-map-header h2 {
+        font-size: 21px;
+    }
+
+
+    .full-location-map {
+        flex: 1;
+
+        height: auto;
+
+        min-height: 0;
+    }
+
+
+    .location-map-footer {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 12px;
+
+        padding: 14px 18px;
+    }
+
+
+    .google-maps-button {
+        width: 100%;
+    }
+
+}

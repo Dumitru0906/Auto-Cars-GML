@@ -1,0 +1,258 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="ro">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Cerere trimisă | Auto Cars GML
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'dealership/style.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'dealership/find_car.css' %}"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="{% static 'dealership/mobile_nav.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+
+    {% include 'dealership/header.html' %}
+
+
+
+    <main class="success-page">
+
+        <div class="success-card">
+
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+
+            <p class="success-small">
+                CERERE ÎNREGISTRATĂ
+            </p>
+
+
+            <h1>
+                Mulțumim, {{ car_request.full_name }}!
+            </h1>
+
+
+            <p class="success-intro">
+
+                Cererea ta a fost salvată cu succes.
+
+                Auto Cars GML poate vedea acum preferințele
+                tale și te poate contacta folosind datele
+                introduse.
+
+            </p>
+
+
+
+            <div class="request-summary">
+
+
+                <div class="summary-heading">
+
+                    <span>
+                        Cererea ta
+                    </span>
+
+                </div>
+
+
+
+                <div class="summary-grid">
+
+
+                    <div>
+
+                        <span>Marcă</span>
+
+                        <strong>
+                            {{ car_request.brand }}
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>Model</span>
+
+                        <strong>
+
+                            {% if car_request.model_name %}
+
+                                {{ car_request.model_name }}
+
+                            {% else %}
+
+                                Oricare
+
+                            {% endif %}
+
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>Buget maxim</span>
+
+                        <strong>
+                            {{ car_request.budget_max }} €
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>An minim</span>
+
+                        <strong>
+
+                            {% if car_request.year_min %}
+
+                                {{ car_request.year_min }}
+
+                            {% else %}
+
+                                Nespecificat
+
+                            {% endif %}
+
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>Combustibil</span>
+
+                        <strong>
+                            {{ car_request.get_fuel_display }}
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>Cutie</span>
+
+                        <strong>
+                            {{ car_request.get_transmission_display }}
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="whatsapp-followup">
+
+
+                <div>
+
+                    <strong>
+                        Vrei să ne scrii și pe WhatsApp?
+                    </strong>
+
+                    <p>
+
+                        Am pregătit automat mesajul cu toate
+                        detaliile cererii tale.
+
+                        Trebuie doar să apeși butonul și apoi
+                        să trimiți mesajul în WhatsApp.
+
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="{{ whatsapp_url }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="success-whatsapp"
+                >
+                    Continuă pe WhatsApp
+                    <span>→</span>
+                </a>
+
+
+            </div>
+
+
+
+            <div class="success-actions">
+
+
+                <a
+                    href="{% url 'inventory' %}#disponibile"
+                    class="success-secondary"
+                >
+                    Vezi mașinile disponibile
+                </a>
+
+
+                <a
+                    href="{% url 'home' %}"
+                    class="success-home"
+                >
+                    Înapoi la pagina principală
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+
+    <script
+        src="{% static 'dealership/mobile_nav.js' %}"
+    ></script>
+
+</body>
+
+</html>

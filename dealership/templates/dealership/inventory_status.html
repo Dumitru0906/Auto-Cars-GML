@@ -1,0 +1,326 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="ro">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {{ page_title }}
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'dealership/style.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'dealership/inventory.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'dealership/mobile_nav.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+
+    {% include 'dealership/header.html' %}
+
+
+
+    <!-- ==================================================
+         PAGE HERO
+    =================================================== -->
+
+    <section class="inventory-hero">
+
+        <div class="inventory-container">
+
+            <p class="inventory-eyebrow">
+                AUTO CARS GML
+            </p>
+
+            <h1>
+                {{ hero_title }}
+            </h1>
+
+            <p class="inventory-intro">
+                {{ hero_intro }}
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         CARS
+    =================================================== -->
+
+    <section
+        class="
+            inventory-section
+
+            {% if status_key == 'available' %}
+                available-section
+            {% elif status_key == 'reserved' %}
+                reserved-section
+            {% else %}
+                sold-section
+            {% endif %}
+        "
+    >
+
+        <div class="inventory-container">
+
+
+            <div class="inventory-section-heading">
+
+                <div>
+
+                    <p class="inventory-small">
+                        {{ section_label }}
+                    </p>
+
+                    <h2>
+                        {{ hero_title }}
+                    </h2>
+
+                </div>
+
+
+                <div class="inventory-count">
+
+                    {{ cars|length }}
+
+                    {% if cars|length == 1 %}
+                        mașină
+                    {% else %}
+                        mașini
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+
+            {% if cars %}
+
+
+                <div class="inventory-grid">
+
+
+                    {% for car in cars %}
+
+
+                        <article
+                            class="
+                                inventory-card
+
+                                {% if status_key == 'reserved' %}
+                                    reserved-card
+                                {% elif status_key == 'sold' %}
+                                    sold-card
+                                {% endif %}
+                            "
+                        >
+
+
+                            <!-- IMAGE -->
+
+                            <div class="inventory-image">
+
+
+                                {% if car.main_image %}
+
+                                    <img
+                                        src="{{ car.main_image.image.url }}"
+                                        alt="{{ car.brand }} {{ car.model_name }}"
+                                    >
+
+                                {% else %}
+
+                                    <div class="inventory-no-image">
+                                        Fără fotografie
+                                    </div>
+
+                                {% endif %}
+
+
+
+                                {% if status_key == 'sold' %}
+
+                                    <div class="sold-image-overlay"></div>
+
+                                {% endif %}
+
+
+
+                                <span
+                                    class="
+                                        inventory-status
+                                        {{ status_key }}
+                                    "
+                                >
+
+                                    {% if status_key == 'available' %}
+
+                                        DISPONIBILĂ
+
+                                    {% elif status_key == 'reserved' %}
+
+                                        REZERVATĂ
+
+                                    {% else %}
+
+                                        VÂNDUTĂ
+
+                                    {% endif %}
+
+                                </span>
+
+
+                            </div>
+
+
+
+                            <!-- CONTENT -->
+
+                            <div class="inventory-card-content">
+
+
+                                <h3>
+                                    {{ car.brand }}
+                                    {{ car.model_name }}
+                                </h3>
+
+
+
+                                <div class="inventory-specs">
+
+                                    <span>
+                                        {{ car.year }}
+                                    </span>
+
+                                    <span>
+                                        {{ car.mileage }} km
+                                    </span>
+
+                                    <span>
+                                        {{ car.get_transmission_display }}
+                                    </span>
+
+                                    <span>
+                                        {{ car.get_fuel_display }}
+                                    </span>
+
+                                </div>
+
+
+
+                                <div class="inventory-card-bottom">
+
+
+                                    {% if status_key == 'sold' %}
+
+                                        <span class="sold-text">
+                                            VÂNDUTĂ
+                                        </span>
+
+                                    {% else %}
+
+                                        <strong>
+                                            {{ car.price }} €
+                                        </strong>
+
+                                    {% endif %}
+
+
+
+                                    <a
+                                        href="{% url 'car_detail' car.pk %}"
+                                        class="
+                                            inventory-button
+
+                                            {% if status_key == 'sold' %}
+                                                sold-button
+                                            {% endif %}
+                                        "
+                                    >
+                                        Vezi mașina
+                                        <span>→</span>
+                                    </a>
+
+
+                                </div>
+
+
+                            </div>
+
+
+                        </article>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            {% else %}
+
+
+                <div
+                    class="
+                        inventory-empty
+
+                        {% if status_key == 'sold' %}
+                            dark
+                        {% endif %}
+                    "
+                >
+
+                    <h3>
+                        {{ empty_title }}
+                    </h3>
+
+                    <p>
+                        {{ empty_text }}
+                    </p>
+
+                </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+    </section>
+
+
+
+    <script
+        src="{% static 'dealership/mobile_nav.js' %}"
+    ></script>
+
+
+</body>
+
+</html>

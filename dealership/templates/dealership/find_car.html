@@ -1,0 +1,609 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="ro">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Găsește-mi o mașină | Auto Cars GML
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'dealership/style.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'dealership/find_car.css' %}"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="{% static 'dealership/mobile_nav.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    {% include 'dealership/header.html' %}
+
+
+
+    <!-- HERO -->
+
+    <section class="request-hero">
+
+        <div class="request-container">
+
+            <p class="request-eyebrow">
+                SERVICIU PERSONALIZAT
+            </p>
+
+            <h1>
+                Spune-ne ce mașină
+                <span>cauți.</span>
+            </h1>
+
+            <p class="request-hero-text">
+
+                Nu ai găsit în stoc mașina potrivită?
+
+                Completează cererea de mai jos, iar după trimitere
+                vom pregăti automat un mesaj WhatsApp cu toate
+                preferințele tale.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FORM -->
+
+    <main class="request-section">
+
+        <div class="request-container">
+
+            <div class="request-layout">
+
+
+                <section class="request-form-card">
+
+
+                    <div class="form-heading">
+
+                        <p>
+                            CERERE PERSONALIZATĂ
+                        </p>
+
+                        <h2>
+                            Ce mașină îți dorești?
+                        </h2>
+
+                    </div>
+
+
+
+                    <form
+                        method="post"
+                        class="request-form"
+                    >
+
+                        {% csrf_token %}
+
+
+
+                        {% if form.non_field_errors %}
+
+                            <div class="form-general-error">
+                                {{ form.non_field_errors }}
+                            </div>
+
+                        {% endif %}
+
+
+
+                        <!-- CONTACT -->
+
+                        <div class="form-section-title">
+
+                            <span>01</span>
+
+                            Date de contact
+
+                        </div>
+
+
+
+                        <div class="form-grid">
+
+
+                            <div class="form-field">
+
+                                <label
+                                    for="{{ form.full_name.id_for_label }}"
+                                >
+                                    Nume complet *
+                                </label>
+
+                                {{ form.full_name }}
+
+                                {% for error in form.full_name.errors %}
+
+                                    <p class="field-error">
+                                        {{ error }}
+                                    </p>
+
+                                {% endfor %}
+
+                            </div>
+
+
+
+                            <div class="form-field">
+
+                                <label
+                                    for="{{ form.phone.id_for_label }}"
+                                >
+                                    Telefon *
+                                </label>
+
+                                {{ form.phone }}
+
+                                {% for error in form.phone.errors %}
+
+                                    <p class="field-error">
+                                        {{ error }}
+                                    </p>
+
+                                {% endfor %}
+
+                            </div>
+
+
+
+                            <div class="form-field form-field-full">
+
+                                <label
+                                    for="{{ form.email.id_for_label }}"
+                                >
+                                    Email
+                                    <span>opțional</span>
+                                </label>
+
+                                {{ form.email }}
+
+                                {% for error in form.email.errors %}
+
+                                    <p class="field-error">
+                                        {{ error }}
+                                    </p>
+
+                                {% endfor %}
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- CAR DETAILS -->
+
+                        <div class="form-section-title">
+
+                            <span>02</span>
+
+                            Mașina dorită
+
+                        </div>
+
+
+
+                        <div class="form-grid">
+
+
+                            <div class="form-field">
+
+                                <label
+                                    for="{{ form.brand.id_for_label }}"
+                                >
+                                    Marcă *
+                                </label>
+
+                                {{ form.brand }}
+
+                                {% for error in form.brand.errors %}
+
+                                    <p class="field-error">
+                                        {{ error }}
+                                    </p>
+
+                                {% endfor %}
+
+                            </div>
+
+
+
+                            <div class="form-field">
+
+                                <label
+                                    for="{{ form.model_name.id_for_label }}"
+                                >
+                                    Model
+                                    <span>opțional</span>
+                                </label>
+
+                                {{ form.model_name }}
+
+                                {% for error in form.model_name.errors %}
+
+                                    <p class="field-error">
+                                        {{ error }}
+                                    </p>
+
+                                {% endfor %}
+
+                            </div>
+
+
+
+                            <div class="form-field">
+
+                                <label
+                                    for="{{ form.budget_max.id_for_label }}"
+                                >
+                                    Buget maxim (€) *
+                                </label>
+
+                                {{ form.budget_max }}
+
+                                {% for error in form.budget_max.errors %}
+
+                                    <p class="field-error">
+                                        {{ error }}
+                                    </p>
+
+                                {% endfor %}
+
+                            </div>
+
+
+
+                            <div class="form-field">
+
+                                <label
+                                    for="{{ form.year_min.id_for_label }}"
+                                >
+                                    An minim
+                                    <span>opțional</span>
+                                </label>
+
+                                {{ form.year_min }}
+
+                                {% for error in form.year_min.errors %}
+
+                                    <p class="field-error">
+                                        {{ error }}
+                                    </p>
+
+                                {% endfor %}
+
+                            </div>
+
+
+
+                            <div class="form-field">
+
+                                <label
+                                    for="{{ form.fuel.id_for_label }}"
+                                >
+                                    Combustibil
+                                </label>
+
+                                {{ form.fuel }}
+
+                                {% for error in form.fuel.errors %}
+
+                                    <p class="field-error">
+                                        {{ error }}
+                                    </p>
+
+                                {% endfor %}
+
+                            </div>
+
+
+
+                            <div class="form-field">
+
+                                <label
+                                    for="{{ form.transmission.id_for_label }}"
+                                >
+                                    Cutie de viteze
+                                </label>
+
+                                {{ form.transmission }}
+
+                                {% for error in form.transmission.errors %}
+
+                                    <p class="field-error">
+                                        {{ error }}
+                                    </p>
+
+                                {% endfor %}
+
+                            </div>
+
+
+
+                            <div class="form-field form-field-full">
+
+                                <label
+                                    for="{{ form.max_mileage.id_for_label }}"
+                                >
+                                    Kilometraj maxim
+                                    <span>opțional</span>
+                                </label>
+
+                                {{ form.max_mileage }}
+
+                                {% for error in form.max_mileage.errors %}
+
+                                    <p class="field-error">
+                                        {{ error }}
+                                    </p>
+
+                                {% endfor %}
+
+                            </div>
+
+
+
+                            <div class="form-field form-field-full">
+
+                                <label
+                                    for="{{ form.notes.id_for_label }}"
+                                >
+                                    Alte preferințe
+                                    <span>opțional</span>
+                                </label>
+
+                                {{ form.notes }}
+
+
+                                <p class="field-help">
+
+                                    Poți menționa culoarea,
+                                    motorizarea, dotările,
+                                    numărul de locuri sau orice
+                                    alt detaliu important.
+
+                                </p>
+
+
+                                {% for error in form.notes.errors %}
+
+                                    <p class="field-error">
+                                        {{ error }}
+                                    </p>
+
+                                {% endfor %}
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- PRIVACY -->
+
+                        <div class="privacy-field">
+
+                            {{ form.privacy_consent }}
+
+                            <label
+                                for="{{ form.privacy_consent.id_for_label }}"
+                            >
+
+                                Sunt de acord ca datele furnizate
+                                să fie folosite pentru a fi contactat
+                                în legătură cu această cerere.
+
+                            </label>
+
+                        </div>
+
+
+
+                        {% for error in form.privacy_consent.errors %}
+
+                            <p class="field-error privacy-error">
+                                {{ error }}
+                            </p>
+
+                        {% endfor %}
+
+
+
+                        <!-- SUBMIT -->
+
+                        <button
+                            type="submit"
+                            class="request-submit"
+                        >
+
+                            Trimite cererea pe WhatsApp
+
+                            <span>→</span>
+
+                        </button>
+
+
+
+                        <p
+                            style="
+                                margin: 12px 0 0;
+                                text-align: center;
+                                color: #888;
+                                font-size: 11px;
+                                line-height: 1.5;
+                            "
+                        >
+
+                            După apăsarea butonului,
+                            WhatsApp se va deschide cu mesajul
+                            completat automat.
+
+                            Va trebui doar să apeși
+                            <strong>Trimite</strong> în WhatsApp.
+
+                        </p>
+
+
+                    </form>
+
+
+                </section>
+
+
+
+                <!-- RIGHT SIDE -->
+
+                <aside class="request-side">
+
+
+                    <div class="request-side-card">
+
+
+                        <p class="side-small">
+                            CUM FUNCȚIONEAZĂ
+                        </p>
+
+
+                        <h3>
+                            Simplu și direct
+                        </h3>
+
+
+
+                        <div class="request-step">
+
+                            <span>1</span>
+
+                            <div>
+
+                                <strong>
+                                    Spune-ne ce cauți
+                                </strong>
+
+                                <p>
+                                    Completează preferințele
+                                    și bugetul.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="request-step">
+
+                            <span>2</span>
+
+                            <div>
+
+                                <strong>
+                                    Deschidem WhatsApp
+                                </strong>
+
+                                <p>
+                                    Toate informațiile tale sunt
+                                    puse automat într-un mesaj.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="request-step">
+
+                            <span>3</span>
+
+                            <div>
+
+                                <strong>
+                                    Trimite mesajul
+                                </strong>
+
+                                <p>
+                                    Apeși Trimite în WhatsApp și
+                                    discutăm direct cu tine.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="request-side-note">
+
+                        <strong>
+                            Cu cât ne spui mai multe, cu atât mai bine.
+                        </strong>
+
+                        <p>
+
+                            Dotări, motorizare, culoare,
+                            kilometraj sau alte preferințe ne
+                            ajută să înțelegem exact ce cauți.
+
+                        </p>
+
+                    </div>
+
+
+                </aside>
+
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <script
+        src="{% static 'dealership/mobile_nav.js' %}"
+    ></script>
+
+</body>
+
+</html>

@@ -1,0 +1,578 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="ro">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Mașini | Auto Cars GML
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'dealership/style.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'dealership/inventory.css' %}"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="{% static 'dealership/mobile_nav.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================
+         NAVBAR
+    ====================================== -->
+
+    {% include 'dealership/header.html' %}
+
+
+
+    <!-- =====================================
+         PAGE HEADER
+    ====================================== -->
+
+    <section class="inventory-hero">
+
+        <div class="inventory-container">
+
+            <p class="inventory-eyebrow">
+                AUTO CARS GML
+            </p>
+
+            <h1>
+                Mașinile noastre
+            </h1>
+
+            <p class="inventory-intro">
+
+                Descoperă mașinile disponibile în stoc,
+                vehiculele rezervate și o selecție dintre
+                mașinile vândute anterior.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         AVAILABLE CARS
+    ====================================== -->
+
+    <section
+        class="inventory-section available-section"
+        id="disponibile"
+    >
+
+        <div class="inventory-container">
+
+
+            <div class="inventory-section-heading">
+
+                <div>
+
+                    <p class="inventory-small">
+                        STOC ACTUAL
+                    </p>
+
+                    <h2>
+                        Mașini disponibile
+                    </h2>
+
+                </div>
+
+
+                <div class="inventory-count">
+
+                    {{ available_cars|length }}
+
+                    {% if available_cars|length == 1 %}
+                        mașină
+                    {% else %}
+                        mașini
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+
+            {% if available_cars %}
+
+
+                <div class="inventory-grid">
+
+
+                    {% for car in available_cars %}
+
+
+                        <article class="inventory-card">
+
+
+                            <div class="inventory-image">
+
+
+                                {% if car.main_image %}
+
+                                    <img
+                                        src="{{ car.main_image.image.url }}"
+                                        alt="{{ car.brand }} {{ car.model_name }}"
+                                    >
+
+                                {% else %}
+
+                                    <div class="inventory-no-image">
+                                        Fără fotografie
+                                    </div>
+
+                                {% endif %}
+
+
+                                <span class="inventory-status available">
+                                    DISPONIBILĂ
+                                </span>
+
+
+                            </div>
+
+
+
+                            <div class="inventory-card-content">
+
+
+                                <h3>
+                                    {{ car.brand }} {{ car.model_name }}
+                                </h3>
+
+
+                                <div class="inventory-specs">
+
+                                    <span>
+                                        {{ car.year }}
+                                    </span>
+
+                                    <span>
+                                        {{ car.mileage }} km
+                                    </span>
+
+                                    <span>
+                                        {{ car.get_transmission_display }}
+                                    </span>
+
+                                    <span>
+                                        {{ car.get_fuel_display }}
+                                    </span>
+
+                                </div>
+
+
+
+                                <div class="inventory-card-bottom">
+
+
+                                    <strong>
+                                        {{ car.price }} €
+                                    </strong>
+
+
+                                    <a
+                                        href="{% url 'car_detail' car.pk %}"
+                                        class="inventory-button"
+                                    >
+                                        Vezi mașina
+                                        <span>→</span>
+                                    </a>
+
+
+                                </div>
+
+
+                            </div>
+
+
+                        </article>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            {% else %}
+
+
+                <div class="inventory-empty">
+
+                    <h3>
+                        Momentan nu există mașini disponibile.
+                    </h3>
+
+                    <p>
+                        Revino în curând pentru a vedea noile mașini.
+                    </p>
+
+                </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         RESERVED CARS
+    ====================================== -->
+
+    {% if reserved_cars %}
+
+        <section
+            class="inventory-section reserved-section"
+            id="rezervate"
+        >
+
+            <div class="inventory-container">
+
+
+                <div class="inventory-section-heading">
+
+                    <div>
+
+                        <p class="inventory-small">
+                            ÎN CURS DE VÂNZARE
+                        </p>
+
+                        <h2>
+                            Mașini rezervate
+                        </h2>
+
+                    </div>
+
+
+                    <div class="inventory-count">
+
+                        {{ reserved_cars|length }}
+
+                        {% if reserved_cars|length == 1 %}
+                            mașină
+                        {% else %}
+                            mașini
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="inventory-grid">
+
+
+                    {% for car in reserved_cars %}
+
+
+                        <article class="inventory-card reserved-card">
+
+
+                            <div class="inventory-image">
+
+
+                                {% if car.main_image %}
+
+                                    <img
+                                        src="{{ car.main_image.image.url }}"
+                                        alt="{{ car.brand }} {{ car.model_name }}"
+                                    >
+
+                                {% else %}
+
+                                    <div class="inventory-no-image">
+                                        Fără fotografie
+                                    </div>
+
+                                {% endif %}
+
+
+                                <span class="inventory-status reserved">
+                                    REZERVATĂ
+                                </span>
+
+
+                            </div>
+
+
+
+                            <div class="inventory-card-content">
+
+
+                                <h3>
+                                    {{ car.brand }} {{ car.model_name }}
+                                </h3>
+
+
+                                <div class="inventory-specs">
+
+                                    <span>
+                                        {{ car.year }}
+                                    </span>
+
+                                    <span>
+                                        {{ car.mileage }} km
+                                    </span>
+
+                                    <span>
+                                        {{ car.get_transmission_display }}
+                                    </span>
+
+                                    <span>
+                                        {{ car.get_fuel_display }}
+                                    </span>
+
+                                </div>
+
+
+
+                                <div class="inventory-card-bottom">
+
+
+                                    <strong>
+                                        {{ car.price }} €
+                                    </strong>
+
+
+                                    <a
+                                        href="{% url 'car_detail' car.pk %}"
+                                        class="inventory-button"
+                                    >
+                                        Vezi mașina
+                                        <span>→</span>
+                                    </a>
+
+
+                                </div>
+
+
+                            </div>
+
+
+                        </article>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    {% endif %}
+
+
+
+    <!-- =====================================
+         SOLD CARS
+    ====================================== -->
+
+    <section
+        class="inventory-section sold-section"
+        id="vandute"
+    >
+
+        <div class="inventory-container">
+
+
+            <div class="inventory-section-heading">
+
+                <div>
+
+                    <p class="inventory-small">
+                        ISTORIC AUTO CARS GML
+                    </p>
+
+                    <h2>
+                        Mașini vândute
+                    </h2>
+
+                </div>
+
+
+                <div class="inventory-count">
+
+                    {{ sold_cars|length }}
+
+                    {% if sold_cars|length == 1 %}
+                        mașină
+                    {% else %}
+                        mașini
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+
+            {% if sold_cars %}
+
+
+                <div class="inventory-grid">
+
+
+                    {% for car in sold_cars %}
+
+
+                        <article class="inventory-card sold-card">
+
+
+                            <div class="inventory-image">
+
+
+                                {% if car.main_image %}
+
+                                    <img
+                                        src="{{ car.main_image.image.url }}"
+                                        alt="{{ car.brand }} {{ car.model_name }}"
+                                    >
+
+                                {% else %}
+
+                                    <div class="inventory-no-image">
+                                        Fără fotografie
+                                    </div>
+
+                                {% endif %}
+
+
+
+                                <div class="sold-image-overlay"></div>
+
+
+                                <span class="inventory-status sold">
+                                    VÂNDUTĂ
+                                </span>
+
+
+                            </div>
+
+
+
+                            <div class="inventory-card-content">
+
+
+                                <h3>
+                                    {{ car.brand }} {{ car.model_name }}
+                                </h3>
+
+
+                                <div class="inventory-specs">
+
+                                    <span>
+                                        {{ car.year }}
+                                    </span>
+
+                                    <span>
+                                        {{ car.mileage }} km
+                                    </span>
+
+                                    <span>
+                                        {{ car.get_transmission_display }}
+                                    </span>
+
+                                    <span>
+                                        {{ car.get_fuel_display }}
+                                    </span>
+
+                                </div>
+
+
+
+                                <div class="inventory-card-bottom">
+
+
+                                    <span class="sold-text">
+                                        VÂNDUTĂ
+                                    </span>
+
+
+                                    <a
+                                        href="{% url 'car_detail' car.pk %}"
+                                        class="inventory-button sold-button"
+                                    >
+                                        Vezi mașina
+                                        <span>→</span>
+                                    </a>
+
+
+                                </div>
+
+
+                            </div>
+
+
+                        </article>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            {% else %}
+
+
+                <div class="inventory-empty dark">
+
+                    <p>
+                        Mașinile vândute vor fi afișate aici.
+                    </p>
+
+                </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+    </section>
+
+
+
+    <script
+        src="{% static 'dealership/mobile_nav.js' %}"
+    ></script>
+
+</body>
+
+</html>

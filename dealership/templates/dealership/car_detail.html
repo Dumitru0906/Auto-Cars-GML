@@ -1,0 +1,1754 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="ro">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {{ car.brand }} {{ car.model_name }} | Auto Cars GML
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'dealership/style.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'dealership/car_detail.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'dealership/mobile_nav.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ==================================================
+         NAVBAR
+    =================================================== -->
+
+    {% include 'dealership/header.html' %}
+
+
+
+    <!-- ==================================================
+         CAR PAGE
+    =================================================== -->
+
+    <main class="detail-page">
+
+
+        <a
+            href="{% url 'inventory' %}"
+            class="back-link"
+        >
+            ← Înapoi la mașini
+        </a>
+
+
+
+        <div class="detail-layout">
+
+
+            <!-- ==================================================
+                 LEFT SIDE - GALLERY
+            =================================================== -->
+
+            <section class="detail-gallery">
+
+
+                <div class="gallery-heading">
+
+                    <h2>
+                        Galerie foto
+                    </h2>
+
+                    <span>
+                        {{ car.images.count }} fotografii
+                    </span>
+
+                </div>
+
+
+
+                {% if car.main_image %}
+
+
+                    <div class="detail-main-image">
+
+
+                        <img
+                            id="mainCarImage"
+                            src="{{ car.main_image.image.url }}"
+                            alt="{{ car.brand }} {{ car.model_name }}"
+                        >
+
+
+                        <div
+                            class="photo-counter"
+                            id="photoCounter"
+                        >
+                            1 / {{ car.images.count }}
+                        </div>
+
+
+
+                        {% if car.images.count > 1 %}
+
+
+                            <button
+                                type="button"
+                                class="gallery-arrow gallery-arrow-left"
+                                id="previousPhoto"
+                                aria-label="Fotografia anterioară"
+                            >
+                                ‹
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="gallery-arrow gallery-arrow-right"
+                                id="nextPhoto"
+                                aria-label="Fotografia următoare"
+                            >
+                                ›
+                            </button>
+
+
+                        {% endif %}
+
+
+                    </div>
+
+
+                {% else %}
+
+
+                    <div class="detail-no-image">
+                        Fără fotografie
+                    </div>
+
+
+                {% endif %}
+
+
+
+                <!-- ==================================================
+                     THUMBNAILS
+                =================================================== -->
+
+                {% if car.images.count > 1 %}
+
+
+                    <div
+                        class="detail-thumbnails"
+                        id="detailThumbnails"
+                    >
+
+
+                        {% for image in car.images.all %}
+
+
+                            <button
+                                type="button"
+                                class="
+                                    detail-thumbnail
+                                    {% if image.id == car.main_image.id %}
+                                        active
+                                    {% endif %}
+                                "
+                                data-image="{{ image.image.url }}"
+                                aria-label="Vezi fotografia {{ forloop.counter }}"
+                            >
+
+                                <img
+                                    src="{{ image.image.url }}"
+                                    alt="{{ car.brand }} {{ car.model_name }} - fotografia {{ forloop.counter }}"
+                                >
+
+                            </button>
+
+
+                        {% endfor %}
+
+
+
+                        {% if car.images.count > 8 %}
+
+
+                            <button
+                                type="button"
+                                class="view-all-photos"
+                                id="viewAllPhotos"
+                                aria-label="Vezi toate fotografiile"
+                            >
+
+                                <span class="view-all-icon">
+                                    ▦
+                                </span>
+
+                                <strong
+                                    id="remainingPhotosCount"
+                                >
+                                    +0
+                                </strong>
+
+                                <span class="view-all-text">
+                                    Vezi toate
+                                </span>
+
+                            </button>
+
+
+                        {% endif %}
+
+
+                    </div>
+
+
+                {% endif %}
+
+
+            </section>
+
+
+
+            <!-- ==================================================
+                 RIGHT SIDE - INFORMATION
+            =================================================== -->
+
+            <section class="detail-information">
+
+
+                <!-- STATUS -->
+
+                {% if car.status == "available" %}
+
+                    <p class="detail-label available">
+                        DISPONIBILĂ
+                    </p>
+
+                {% elif car.status == "reserved" %}
+
+                    <p class="detail-label reserved">
+                        REZERVATĂ
+                    </p>
+
+                {% else %}
+
+                    <p class="detail-label sold">
+                        VÂNDUTĂ
+                    </p>
+
+                {% endif %}
+
+
+
+                <!-- TITLE -->
+
+                <h1>
+                    {{ car.brand }} {{ car.model_name }}
+                </h1>
+
+
+
+                <!-- PRICE -->
+
+                <div class="detail-price">
+                    {{ car.price }} €
+                </div>
+
+
+
+                <!-- SPECS -->
+
+                <div class="detail-spec-grid">
+
+
+                    <div class="detail-spec">
+
+                        <span>
+                            An
+                        </span>
+
+                        <strong>
+                            {{ car.year }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-spec">
+
+                        <span>
+                            Kilometraj
+                        </span>
+
+                        <strong>
+                            {{ car.mileage }} km
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-spec">
+
+                        <span>
+                            Combustibil
+                        </span>
+
+                        <strong>
+                            {{ car.get_fuel_display }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-spec">
+
+                        <span>
+                            Cutie de viteze
+                        </span>
+
+                        <strong>
+                            {{ car.get_transmission_display }}
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- ==================================================
+                     AVAILABLE / RESERVED CAR
+                =================================================== -->
+
+                {% if car.status != "sold" %}
+
+
+                    <div class="detail-actions">
+
+
+                        <a
+                            id="whatsappButton"
+                            href="#"
+                            class="detail-whatsapp"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Scrie pe WhatsApp
+                        </a>
+
+
+                        <button
+                            type="button"
+                            id="callButton"
+                            class="detail-call"
+                        >
+                            Sună acum
+                        </button>
+
+
+                    </div>
+
+
+
+                    <div class="contact-note">
+
+
+                        {% if car.status == "reserved" %}
+
+                            <strong>
+                                Această mașină este momentan rezervată.
+                            </strong>
+
+                            <p>
+                                Ne poți contacta pentru a verifica situația
+                                actuală a rezervării sau pentru a discuta
+                                despre o mașină similară.
+                            </p>
+
+                        {% else %}
+
+                            <strong>
+                                Te interesează această mașină?
+                            </strong>
+
+                            <p>
+                                Contactează-ne direct pentru disponibilitate,
+                                detalii suplimentare sau programarea unei
+                                vizionări.
+                            </p>
+
+                        {% endif %}
+
+
+                    </div>
+
+
+                {% endif %}
+
+
+
+                <!-- ==================================================
+                     SOLD CAR
+                =================================================== -->
+
+                {% if car.status == "sold" %}
+
+
+                    <div class="sold-car-message">
+
+
+                        <div class="sold-message-icon">
+                            ✓
+                        </div>
+
+
+                        <div class="sold-message-content">
+
+
+                            <p class="sold-message-small">
+                                VEHICUL VÂNDUT
+                            </p>
+
+
+                            <h2>
+                                Această mașină nu mai este disponibilă
+                            </h2>
+
+
+                            <p class="sold-message-text">
+
+                                Din păcate, această mașină a fost deja
+                                vândută.
+
+                                Dacă ești în căutarea unei mașini similare,
+                                poți vedea vehiculele pe care le avem în
+                                prezent în stoc sau ne poți trimite o cerere
+                                personalizată, iar noi te putem ajuta să
+                                găsești mașina potrivită.
+
+                            </p>
+
+
+                            <div class="sold-message-actions">
+
+
+                                <a
+                                    href="{% url 'available_inventory' %}"
+                                    class="sold-stock-button"
+                                >
+                                    Vezi mașinile disponibile
+                                    <span>→</span>
+                                </a>
+
+
+                                <a
+                                    href="{% url 'find_car' %}"
+                                    class="sold-custom-coming"
+                                >
+                                    Găsește-mi o mașină
+                                    <span>→</span>
+                                </a>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                {% endif %}
+
+
+            </section>
+
+
+        </div>
+
+
+
+        <!-- ==================================================
+             DESCRIPTION
+        =================================================== -->
+
+        <section class="detail-description">
+
+
+            <div class="description-heading">
+
+                <p>
+                    DETALII VEHICUL
+                </p>
+
+                <h2>
+                    Descriere
+                </h2>
+
+            </div>
+
+
+            <div class="description-content">
+
+
+                {% if car.description %}
+
+                    <p>
+                        {{ car.description|linebreaksbr }}
+                    </p>
+
+                {% else %}
+
+                    <p>
+                        Pentru mai multe informații despre această mașină,
+                        contactează Auto Cars GML.
+                    </p>
+
+                {% endif %}
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ==================================================
+         FULL PHOTO GALLERY
+    =================================================== -->
+
+    <div
+        id="photoGalleryModal"
+        class="photo-gallery-modal"
+        aria-hidden="true"
+    >
+
+
+        <div
+            class="photo-gallery-backdrop"
+            id="photoGalleryBackdrop"
+        ></div>
+
+
+
+        <div
+            class="photo-gallery-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Galerie foto completă"
+        >
+
+
+            <div class="photo-gallery-header">
+
+
+                <div>
+
+                    <p>
+                        GALERIE FOTO
+                    </p>
+
+                    <h2>
+                        {{ car.brand }} {{ car.model_name }}
+                    </h2>
+
+                </div>
+
+
+
+                <button
+                    type="button"
+                    class="photo-gallery-close"
+                    id="photoGalleryClose"
+                    aria-label="Închide galeria"
+                >
+                    ×
+                </button>
+
+
+            </div>
+
+
+
+            <div
+                class="photo-gallery-stage"
+                id="photoGalleryStage"
+            >
+
+
+                <button
+                    type="button"
+                    class="lightbox-arrow lightbox-arrow-left"
+                    id="lightboxPrevious"
+                    aria-label="Fotografia anterioară"
+                >
+                    ‹
+                </button>
+
+
+
+                <img
+                    id="lightboxImage"
+                    src=""
+                    alt="{{ car.brand }} {{ car.model_name }}"
+                >
+
+
+
+                <button
+                    type="button"
+                    class="lightbox-arrow lightbox-arrow-right"
+                    id="lightboxNext"
+                    aria-label="Fotografia următoare"
+                >
+                    ›
+                </button>
+
+
+            </div>
+
+
+
+            <div class="photo-gallery-footer">
+
+
+                <span>
+                    Auto Cars GML
+                </span>
+
+
+                <strong
+                    id="lightboxCounter"
+                >
+                    1 / {{ car.images.count }}
+                </strong>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ==================================================
+         DESKTOP PHONE POPUP
+    =================================================== -->
+
+    <div
+        id="phoneModal"
+        class="phone-modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="phone-modal-overlay"
+            id="phoneModalOverlay"
+        ></div>
+
+
+        <div
+            class="phone-modal-box"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="phoneModalTitle"
+        >
+
+            <button
+                type="button"
+                class="phone-modal-close"
+                id="phoneModalClose"
+                aria-label="Închide"
+            >
+                ×
+            </button>
+
+
+            <p class="phone-modal-small">
+                CONTACT AUTO CARS GML
+            </p>
+
+
+            <h2 id="phoneModalTitle">
+                Sună-ne la
+            </h2>
+
+
+            <div class="phone-modal-number">
+                +40 757 337 253
+            </div>
+
+
+            <p class="phone-modal-description">
+
+                Folosește acest număr pentru a ne contacta direct
+                de pe telefonul tău.
+
+            </p>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         JAVASCRIPT
+    =================================================== -->
+
+    <script>
+
+
+        /*
+        ==========================================
+        PHOTO GALLERY DATA
+        ==========================================
+        */
+
+
+        const mainImage =
+            document.getElementById(
+                "mainCarImage"
+            );
+
+
+        const thumbnails =
+            Array.from(
+                document.querySelectorAll(
+                    ".detail-thumbnail"
+                )
+            );
+
+
+        const previousButton =
+            document.getElementById(
+                "previousPhoto"
+            );
+
+
+        const nextButton =
+            document.getElementById(
+                "nextPhoto"
+            );
+
+
+        const photoCounter =
+            document.getElementById(
+                "photoCounter"
+            );
+
+
+        const viewAllPhotos =
+            document.getElementById(
+                "viewAllPhotos"
+            );
+
+
+        const remainingPhotosCount =
+            document.getElementById(
+                "remainingPhotosCount"
+            );
+
+
+        let currentIndex = 0;
+
+        let originalMainIndex = 0;
+
+
+
+        thumbnails.forEach(
+            function(thumbnail, index) {
+
+                if (
+                    thumbnail.classList.contains(
+                        "active"
+                    )
+                ) {
+
+                    currentIndex = index;
+
+                    originalMainIndex = index;
+
+                }
+
+            }
+        );
+
+
+
+        /*
+        ==========================================
+        SHOW ONLY 7 EXTRA THUMBNAILS
+        ==========================================
+        */
+
+
+        function configureVisibleThumbnails() {
+
+
+            let visibleCount = 0;
+
+
+            thumbnails.forEach(
+                function(thumbnail, index) {
+
+
+                    thumbnail.classList.remove(
+                        "thumbnail-visible"
+                    );
+
+
+                    if (
+                        index === originalMainIndex
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    if (
+                        visibleCount < 7
+                    ) {
+
+                        thumbnail.classList.add(
+                            "thumbnail-visible"
+                        );
+
+                        visibleCount += 1;
+
+                    }
+
+
+                }
+            );
+
+
+
+            if (
+                remainingPhotosCount
+            ) {
+
+                const remaining =
+                    Math.max(
+                        thumbnails.length - 8,
+                        0
+                    );
+
+
+                remainingPhotosCount.textContent =
+                    "+" + remaining;
+
+            }
+
+
+        }
+
+
+
+        configureVisibleThumbnails();
+
+
+
+        /*
+        ==========================================
+        MAIN PHOTO
+        ==========================================
+        */
+
+
+        function showPhoto(index) {
+
+
+            if (
+                !mainImage
+                ||
+                thumbnails.length === 0
+            ) {
+
+                return;
+
+            }
+
+
+            if (
+                index >= thumbnails.length
+            ) {
+
+                index = 0;
+
+            }
+
+
+            if (
+                index < 0
+            ) {
+
+                index =
+                    thumbnails.length - 1;
+
+            }
+
+
+            currentIndex = index;
+
+
+            const selectedThumbnail =
+                thumbnails[currentIndex];
+
+
+            mainImage.src =
+                selectedThumbnail.dataset.image;
+
+
+
+            thumbnails.forEach(
+                function(thumbnail) {
+
+                    thumbnail.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
+
+
+
+            selectedThumbnail.classList.add(
+                "active"
+            );
+
+
+
+            if (
+                photoCounter
+            ) {
+
+                photoCounter.textContent =
+                    (currentIndex + 1)
+                    + " / "
+                    + thumbnails.length;
+
+            }
+
+
+        }
+
+
+
+        thumbnails.forEach(
+            function(thumbnail, index) {
+
+
+                thumbnail.addEventListener(
+                    "click",
+                    function() {
+
+                        showPhoto(index);
+
+                    }
+                );
+
+
+            }
+        );
+
+
+
+        if (
+            previousButton
+        ) {
+
+            previousButton.addEventListener(
+                "click",
+                function() {
+
+                    showPhoto(
+                        currentIndex - 1
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        if (
+            nextButton
+        ) {
+
+            nextButton.addEventListener(
+                "click",
+                function() {
+
+                    showPhoto(
+                        currentIndex + 1
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        if (
+            photoCounter
+            &&
+            thumbnails.length > 0
+        ) {
+
+            photoCounter.textContent =
+                (currentIndex + 1)
+                + " / "
+                + thumbnails.length;
+
+        }
+
+
+
+        /*
+        ==========================================
+        FULL SCREEN PHOTO GALLERY
+        ==========================================
+        */
+
+
+        const photoGalleryModal =
+            document.getElementById(
+                "photoGalleryModal"
+            );
+
+
+        const photoGalleryBackdrop =
+            document.getElementById(
+                "photoGalleryBackdrop"
+            );
+
+
+        const photoGalleryClose =
+            document.getElementById(
+                "photoGalleryClose"
+            );
+
+
+        const lightboxImage =
+            document.getElementById(
+                "lightboxImage"
+            );
+
+
+        const lightboxCounter =
+            document.getElementById(
+                "lightboxCounter"
+            );
+
+
+        const lightboxPrevious =
+            document.getElementById(
+                "lightboxPrevious"
+            );
+
+
+        const lightboxNext =
+            document.getElementById(
+                "lightboxNext"
+            );
+
+
+        const photoGalleryStage =
+            document.getElementById(
+                "photoGalleryStage"
+            );
+
+
+        let lightboxIndex = 0;
+
+
+
+        function showLightboxPhoto(index) {
+
+
+            if (
+                thumbnails.length === 0
+                ||
+                !lightboxImage
+            ) {
+
+                return;
+
+            }
+
+
+            if (
+                index >= thumbnails.length
+            ) {
+
+                index = 0;
+
+            }
+
+
+            if (
+                index < 0
+            ) {
+
+                index =
+                    thumbnails.length - 1;
+
+            }
+
+
+            lightboxIndex = index;
+
+
+            lightboxImage.src =
+                thumbnails[
+                    lightboxIndex
+                ].dataset.image;
+
+
+            if (
+                lightboxCounter
+            ) {
+
+                lightboxCounter.textContent =
+                    (lightboxIndex + 1)
+                    + " / "
+                    + thumbnails.length;
+
+            }
+
+
+        }
+
+
+
+        function openPhotoGallery() {
+
+
+            if (
+                !photoGalleryModal
+                ||
+                thumbnails.length === 0
+            ) {
+
+                return;
+
+            }
+
+
+            showLightboxPhoto(
+                currentIndex
+            );
+
+
+            photoGalleryModal.classList.add(
+                "show"
+            );
+
+
+            photoGalleryModal.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+
+            document.body.classList.add(
+                "modal-open"
+            );
+
+
+        }
+
+
+
+        function closePhotoGallery() {
+
+
+            if (
+                !photoGalleryModal
+            ) {
+
+                return;
+
+            }
+
+
+            photoGalleryModal.classList.remove(
+                "show"
+            );
+
+
+            photoGalleryModal.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+
+            document.body.classList.remove(
+                "modal-open"
+            );
+
+
+        }
+
+
+
+        if (
+            viewAllPhotos
+        ) {
+
+            viewAllPhotos.addEventListener(
+                "click",
+                openPhotoGallery
+            );
+
+        }
+
+
+
+        if (
+            photoGalleryClose
+        ) {
+
+            photoGalleryClose.addEventListener(
+                "click",
+                closePhotoGallery
+            );
+
+        }
+
+
+
+        if (
+            photoGalleryBackdrop
+        ) {
+
+            photoGalleryBackdrop.addEventListener(
+                "click",
+                closePhotoGallery
+            );
+
+        }
+
+
+
+        if (
+            lightboxPrevious
+        ) {
+
+            lightboxPrevious.addEventListener(
+                "click",
+                function() {
+
+                    showLightboxPhoto(
+                        lightboxIndex - 1
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        if (
+            lightboxNext
+        ) {
+
+            lightboxNext.addEventListener(
+                "click",
+                function() {
+
+                    showLightboxPhoto(
+                        lightboxIndex + 1
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        /*
+        ==========================================
+        MOBILE SWIPE
+        ==========================================
+        */
+
+
+        let touchStartX = null;
+
+
+        if (
+            photoGalleryStage
+        ) {
+
+
+            photoGalleryStage.addEventListener(
+                "touchstart",
+                function(event) {
+
+                    touchStartX =
+                        event.changedTouches[0]
+                        .clientX;
+
+                },
+                {
+                    passive: true
+                }
+            );
+
+
+
+            photoGalleryStage.addEventListener(
+                "touchend",
+                function(event) {
+
+
+                    if (
+                        touchStartX === null
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    const touchEndX =
+                        event.changedTouches[0]
+                        .clientX;
+
+
+                    const difference =
+                        touchEndX
+                        - touchStartX;
+
+
+                    if (
+                        Math.abs(difference) > 50
+                    ) {
+
+
+                        if (
+                            difference < 0
+                        ) {
+
+                            showLightboxPhoto(
+                                lightboxIndex + 1
+                            );
+
+                        } else {
+
+                            showLightboxPhoto(
+                                lightboxIndex - 1
+                            );
+
+                        }
+
+
+                    }
+
+
+                    touchStartX = null;
+
+
+                },
+                {
+                    passive: true
+                }
+            );
+
+
+        }
+
+
+
+        /*
+        ==========================================
+        WHATSAPP
+        ==========================================
+        */
+
+
+        const whatsappButton =
+            document.getElementById(
+                "whatsappButton"
+            );
+
+
+        if (
+            whatsappButton
+        ) {
+
+
+            const phoneNumber =
+                "40757337253";
+
+
+            const carBrand =
+                "{{ car.brand|escapejs }}";
+
+
+            const carModel =
+                "{{ car.model_name|escapejs }}";
+
+
+            const carYear =
+                "{{ car.year|escapejs }}";
+
+
+            const carPrice =
+                "{{ car.price|escapejs }}";
+
+
+
+            const message =
+                "Bună ziua! "
+                + "Sunt interesat de "
+                + carBrand
+                + " "
+                + carModel
+                + ", anul "
+                + carYear
+                + ", listat la prețul de "
+                + carPrice
+                + " € pe site-ul Auto Cars GML. "
+                + "Mai este disponibilă?";
+
+
+
+            const whatsappURL =
+                "https://wa.me/"
+                + phoneNumber
+                + "?text="
+                + encodeURIComponent(
+                    message
+                );
+
+
+
+            whatsappButton.href =
+                whatsappURL;
+
+
+        }
+
+
+
+        /*
+        ==========================================
+        PHONE BUTTON
+        ==========================================
+        */
+
+
+        const callButton =
+            document.getElementById(
+                "callButton"
+            );
+
+
+        const phoneModal =
+            document.getElementById(
+                "phoneModal"
+            );
+
+
+        const phoneModalClose =
+            document.getElementById(
+                "phoneModalClose"
+            );
+
+
+        const phoneModalOverlay =
+            document.getElementById(
+                "phoneModalOverlay"
+            );
+
+
+
+        function isMobilePhone() {
+
+
+            const userAgent =
+                navigator.userAgent
+                || navigator.vendor
+                || window.opera;
+
+
+            const isAndroid =
+                /android/i.test(
+                    userAgent
+                );
+
+
+            const isIPhone =
+                /iPhone|iPod/i.test(
+                    userAgent
+                );
+
+
+            return (
+                isAndroid
+                ||
+                isIPhone
+            );
+
+
+        }
+
+
+
+        function openPhoneModal() {
+
+
+            if (
+                !phoneModal
+            ) {
+
+                return;
+
+            }
+
+
+            phoneModal.classList.add(
+                "show"
+            );
+
+
+            phoneModal.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+
+            document.body.classList.add(
+                "modal-open"
+            );
+
+
+        }
+
+
+
+        function closePhoneModal() {
+
+
+            if (
+                !phoneModal
+            ) {
+
+                return;
+
+            }
+
+
+            phoneModal.classList.remove(
+                "show"
+            );
+
+
+            phoneModal.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+
+            document.body.classList.remove(
+                "modal-open"
+            );
+
+
+        }
+
+
+
+        if (
+            callButton
+        ) {
+
+
+            callButton.addEventListener(
+                "click",
+                function() {
+
+
+                    if (
+                        isMobilePhone()
+                    ) {
+
+
+                        window.location.href =
+                            "tel:+40757337253";
+
+
+                    } else {
+
+
+                        openPhoneModal();
+
+
+                    }
+
+
+                }
+            );
+
+
+        }
+
+
+
+        if (
+            phoneModalClose
+        ) {
+
+            phoneModalClose.addEventListener(
+                "click",
+                closePhoneModal
+            );
+
+        }
+
+
+
+        if (
+            phoneModalOverlay
+        ) {
+
+            phoneModalOverlay.addEventListener(
+                "click",
+                closePhoneModal
+            );
+
+        }
+
+
+
+        /*
+        ==========================================
+        KEYBOARD CONTROLS
+        ==========================================
+        */
+
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+
+                if (
+                    photoGalleryModal
+                    &&
+                    photoGalleryModal.classList.contains(
+                        "show"
+                    )
+                ) {
+
+
+                    if (
+                        event.key === "Escape"
+                    ) {
+
+                        closePhotoGallery();
+
+                        return;
+
+                    }
+
+
+                    if (
+                        event.key === "ArrowLeft"
+                    ) {
+
+                        showLightboxPhoto(
+                            lightboxIndex - 1
+                        );
+
+                        return;
+
+                    }
+
+
+                    if (
+                        event.key === "ArrowRight"
+                    ) {
+
+                        showLightboxPhoto(
+                            lightboxIndex + 1
+                        );
+
+                        return;
+
+                    }
+
+
+                }
+
+
+
+                if (
+                    event.key === "Escape"
+                    &&
+                    phoneModal
+                    &&
+                    phoneModal.classList.contains(
+                        "show"
+                    )
+                ) {
+
+                    closePhoneModal();
+
+                }
+
+
+            }
+        );
+
+
+    </script>
+
+
+
+    <script
+        src="{% static 'dealership/mobile_nav.js' %}"
+    ></script>
+
+
+</body>
+
+</html>

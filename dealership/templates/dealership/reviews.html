@@ -1,0 +1,405 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="ro">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Recenzii | Auto Cars GML
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'dealership/style.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'dealership/mobile_nav.css' %}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'dealership/info_pages.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+
+    {% include 'dealership/header.html' %}
+
+
+
+    <section class="info-hero">
+
+        <div class="info-container">
+
+            <p class="info-eyebrow">
+                EXPERIENȚELE CLIENȚILOR
+            </p>
+
+            <h1>
+                Recenziile
+                <span>clienților noștri.</span>
+            </h1>
+
+            <p>
+
+                Experiențele reale ale celor care au ales
+                Auto Cars GML.
+
+                Ai cumpărat o mașină de la noi?
+                Ne-ar face plăcere să ne spui cum a fost
+                experiența ta.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <main class="reviews-page">
+
+        <div class="info-container">
+
+
+            {% if submitted %}
+
+                <div class="review-success">
+
+                    <div class="review-success-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Mulțumim pentru recenzie!
+                        </strong>
+
+                        <p>
+                            Recenzia ta a fost înregistrată
+                            și va apărea după verificare.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+
+
+            <div class="reviews-heading">
+
+                <div>
+
+                    <p class="section-label">
+                        RECENZII
+                    </p>
+
+                    <h2>
+                        Ce spun clienții
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            {% if reviews %}
+
+                <div class="reviews-grid">
+
+
+                    {% for review in reviews %}
+
+                        <article class="review-card">
+
+
+                            <div class="review-stars">
+
+                                {% if review.rating >= 1 %}★{% endif %}
+                                {% if review.rating >= 2 %}★{% endif %}
+                                {% if review.rating >= 3 %}★{% endif %}
+                                {% if review.rating >= 4 %}★{% endif %}
+                                {% if review.rating >= 5 %}★{% endif %}
+
+                            </div>
+
+
+                            <p class="review-text">
+                                “{{ review.comment }}”
+                            </p>
+
+
+                            <div class="review-author">
+
+                                <div class="review-avatar">
+
+                                    {{ review.customer_name|first|upper }}
+
+                                </div>
+
+
+                                <div>
+
+                                    <strong>
+                                        {{ review.customer_name }}
+                                    </strong>
+
+
+                                    {% if review.car_model %}
+
+                                        <span>
+                                            {{ review.car_model }}
+                                        </span>
+
+                                    {% endif %}
+
+
+                                    <span>
+
+                                        {% if review.review_date %}
+
+                                            {{ review.review_date|date:"d.m.Y" }}
+
+                                        {% else %}
+
+                                            {{ review.created_at|date:"d.m.Y" }}
+
+                                        {% endif %}
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                        </article>
+
+                    {% endfor %}
+
+
+                </div>
+
+            {% else %}
+
+
+                <div class="reviews-empty">
+
+                    <div class="reviews-empty-star">
+                        ★
+                    </div>
+
+                    <h3>
+                        Primele recenzii vor apărea aici.
+                    </h3>
+
+                    <p>
+
+                        Nu afișăm recenzii inventate.
+
+                        Pe măsură ce clienții își împărtășesc
+                        experiența, recenziile aprobate vor fi
+                        publicate în această secțiune.
+
+                    </p>
+
+                </div>
+
+
+            {% endif %}
+
+
+
+            <section class="leave-review">
+
+
+                <div class="leave-review-intro">
+
+                    <p class="section-label">
+                        AI CUMPĂRAT DE LA NOI?
+                    </p>
+
+                    <h2>
+                        Lasă-ne o recenzie
+                    </h2>
+
+                    <p>
+
+                        Experiența ta îi poate ajuta și pe alți
+                        oameni să ia o decizie mai informată.
+
+                    </p>
+
+                </div>
+
+
+
+                <form
+                    method="post"
+                    class="review-form"
+                >
+
+                    {% csrf_token %}
+
+
+                    <div class="review-form-grid">
+
+
+                        <div class="info-form-field">
+
+                            <label
+                                for="{{ review_form.customer_name.id_for_label }}"
+                            >
+                                Nume *
+                            </label>
+
+                            {{ review_form.customer_name }}
+
+                            {% for error in review_form.customer_name.errors %}
+
+                                <span class="form-error">
+                                    {{ error }}
+                                </span>
+
+                            {% endfor %}
+
+                        </div>
+
+
+
+                        <div class="info-form-field">
+
+                            <label
+                                for="{{ review_form.rating.id_for_label }}"
+                            >
+                                Evaluare *
+                            </label>
+
+                            {{ review_form.rating }}
+
+                            {% for error in review_form.rating.errors %}
+
+                                <span class="form-error">
+                                    {{ error }}
+                                </span>
+
+                            {% endfor %}
+
+                        </div>
+
+
+
+                        <div class="info-form-field full">
+
+                            <label
+                                for="{{ review_form.car_model.id_for_label }}"
+                            >
+                                Mașina cumpărată
+                                <span>opțional</span>
+                            </label>
+
+                            {{ review_form.car_model }}
+
+                        </div>
+
+
+
+                        <div class="info-form-field full">
+
+                            <label
+                                for="{{ review_form.comment.id_for_label }}"
+                            >
+                                Recenzia ta *
+                            </label>
+
+                            {{ review_form.comment }}
+
+                            {% for error in review_form.comment.errors %}
+
+                                <span class="form-error">
+                                    {{ error }}
+                                </span>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="review-consent">
+
+                        {{ review_form.publish_consent }}
+
+                        <label
+                            for="{{ review_form.publish_consent.id_for_label }}"
+                        >
+
+                            Sunt de acord ca recenzia și numele meu
+                            să fie afișate public pe site.
+
+                        </label>
+
+                    </div>
+
+
+                    {% for error in review_form.publish_consent.errors %}
+
+                        <span class="form-error">
+                            {{ error }}
+                        </span>
+
+                    {% endfor %}
+
+
+
+                    <button
+                        type="submit"
+                        class="review-submit"
+                    >
+                        Trimite recenzia
+                        <span>→</span>
+                    </button>
+
+
+                </form>
+
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+
+
+    <script
+        src="{% static 'dealership/mobile_nav.js' %}"
+    ></script>
+
+
+</body>
+
+</html>
