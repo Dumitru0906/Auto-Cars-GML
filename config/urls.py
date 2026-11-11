@@ -1,4 +1,4 @@
-
+from django.http import HttpResponse
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
 from django.urls import path, include
@@ -25,6 +25,16 @@ urlpatterns = [
         sitemap,
         {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'
+    ),
+
+    path(
+        'robots.txt',
+        lambda request: HttpResponse(
+            "User-agent: *\n"
+            "Allow: /\n"
+            "Sitemap: https://autocarsgml.eu.pythonanywhere.com/sitemap.xml\n",
+            content_type="text/plain"
+        ),
     ),
 
     path('', include('dealership.urls')),

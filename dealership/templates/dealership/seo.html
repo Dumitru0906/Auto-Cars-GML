@@ -1,0 +1,150 @@
+{% if request.resolver_match.url_name == 'home' %}
+
+    <title>
+        Auto Cars GML | Mașini de vânzare în Brașov
+    </title>
+
+    <meta
+        name="description"
+        content="Auto Cars GML din Brașov oferă mașini atent selecționate, mașini disponibile, mașini vândute și servicii personalizate pentru găsirea mașinii potrivite."
+    >
+
+
+{% elif request.resolver_match.url_name == 'available_inventory' %}
+
+    <title>
+        Mașini disponibile în Brașov | Auto Cars GML
+    </title>
+
+    <meta
+        name="description"
+        content="Vezi mașinile disponibile în prezent la Auto Cars GML Brașov. Consultă modelele, prețurile, kilometrajul și detaliile fiecărei mașini."
+    >
+
+
+{% elif request.resolver_match.url_name == 'sold_inventory' %}
+
+    <title>
+        Mașini vândute | Auto Cars GML Brașov
+    </title>
+
+    <meta
+        name="description"
+        content="Vezi mașinile vândute anterior prin Auto Cars GML din Brașov și istoricul modelelor comercializate."
+    >
+
+
+{% elif request.resolver_match.url_name == 'reserved_inventory' %}
+
+    <title>
+        Mașini rezervate | Auto Cars GML Brașov
+    </title>
+
+    <meta
+        name="description"
+        content="Vezi mașinile rezervate în prezent la Auto Cars GML Brașov."
+    >
+
+
+{% elif request.resolver_match.url_name == 'car_detail' %}
+
+    <title>
+        {{ car.brand }} {{ car.model_name }} {{ car.year }} de vânzare | Auto Cars GML Brașov
+    </title>
+
+    <meta
+        name="description"
+        content="{{ car.brand }} {{ car.model_name }}, an {{ car.year }}, {{ car.mileage }} km, {{ car.get_fuel_display }}, {{ car.get_transmission_display }}. Vezi prețul, fotografiile și detaliile complete la Auto Cars GML Brașov."
+    >
+
+
+{% elif request.resolver_match.url_name == 'reviews' %}
+
+    <title>
+        Recenzii clienți | Auto Cars GML Brașov
+    </title>
+
+    <meta
+        name="description"
+        content="Citește recenziile clienților Auto Cars GML din Brașov sau lasă o recenzie despre experiența ta."
+    >
+
+
+{% elif request.resolver_match.url_name == 'contact' %}
+
+    <title>
+        Contact Auto Cars GML | Brașov
+    </title>
+
+    <meta
+        name="description"
+        content="Contactează Auto Cars GML în Brașov prin telefon sau WhatsApp și găsește locația noastră din Piața Auto Korona."
+    >
+
+
+{% elif request.resolver_match.url_name == 'find_car' %}
+
+    <title>
+        Găsește-mi o mașină | Auto Cars GML Brașov
+    </title>
+
+    <meta
+        name="description"
+        content="Spune-ne ce mașină cauți, bugetul și preferințele tale, iar Auto Cars GML te ajută să găsești o variantă potrivită."
+    >
+
+
+{% else %}
+
+    <title>
+        Auto Cars GML | Brașov
+    </title>
+
+    <meta
+        name="description"
+        content="Auto Cars GML din Brașov oferă mașini atent selecționate și servicii personalizate pentru cumpărarea unei mașini."
+    >
+
+{% endif %}
+
+
+<!-- Open Graph -->
+
+<meta
+    property="og:type"
+    content="website"
+>
+
+<meta
+    property="og:site_name"
+    content="Auto Cars GML"
+>
+
+<meta
+    property="og:url"
+    content="{{ request.build_absolute_uri }}"
+>
+
+
+<!-- Local business structured data -->
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "AutoDealer",
+    "name": "Auto Cars GML SRL",
+    "url": "https://autocarsgml.eu.pythonanywhere.com/",
+    "telephone": "+40757337253",
+    "description": "Dealer auto din Brașov cu mașini atent selecționate și servicii personalizate pentru găsirea mașinii potrivite.",
+    "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Brașov",
+        "addressCountry": "RO"
+    },
+    "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 45.6627222,
+        "longitude": 25.5564722
+    }
+}
+</script>
